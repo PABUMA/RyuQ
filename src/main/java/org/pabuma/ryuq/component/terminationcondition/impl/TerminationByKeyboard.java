@@ -1,7 +1,6 @@
 package org.pabuma.ryuq.component.terminationcondition.impl;
 
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
-import org.uma.jmetal.experimental.componentbasedalgorithm.catalogue.termination.Termination;
 import org.uma.jmetal.util.JMetalLogger;
 
 import java.util.Map;
