@@ -56,8 +56,6 @@ public class SimulatedAnnealing<S extends Solution<?>> implements Algorithm<S> {
       S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
       problem.evaluate(mutatedSolution);
 
-      evaluations++;
-
       if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
         currentSolution = mutatedSolution;
       } else {
@@ -68,16 +66,21 @@ public class SimulatedAnnealing<S extends Solution<?>> implements Algorithm<S> {
         }
       }
 
-      bestFoundSolution = currentSolution;
       temperature = coolingScheme.updateTemperature(temperature);
-
-      attributes.put("EVALUATIONS", evaluations);
-      attributes.put("BEST_SOLUTION", bestFoundSolution);
-      attributes.put("CURRENT_SOLUTION", currentSolution);
-
-      observable.setChanged();
-      observable.notifyObservers(attributes);
+      updateProgress();
     }
+  }
+
+  private void updateProgress() {
+    bestFoundSolution = currentSolution;
+    evaluations++;
+
+    attributes.put("EVALUATIONS", evaluations);
+    attributes.put("BEST_SOLUTION", bestFoundSolution);
+    attributes.put("CURRENT_SOLUTION", currentSolution);
+
+    observable.setChanged();
+    observable.notifyObservers(attributes);
   }
 
   public void initProgress() {
@@ -87,6 +90,9 @@ public class SimulatedAnnealing<S extends Solution<?>> implements Algorithm<S> {
     attributes.put("EVALUATIONS", evaluations);
     attributes.put("BEST_SOLUTION", bestFoundSolution);
     attributes.put("CURRENT_SOLUTION", currentSolution);
+
+    observable.setChanged();
+    observable.notifyObservers(attributes);
   }
 
   public void createInitialSolution() {

@@ -25,6 +25,5 @@ public class SimulatedAnnealingDoubleExample {
     simulatedAnnealing.run();
 
     System.out.println("Best solution: " + simulatedAnnealing.getResult().objectives()[0]) ;
-
   }
 }
