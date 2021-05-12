@@ -49,14 +49,8 @@ public class SimulatedAnnealing<S extends Solution<?>> implements Algorithm<S> {
 
   @Override
   public void run() {
-    currentSolution = problem.createSolution();
-    problem.evaluate(currentSolution);
-    evaluations = 1;
-    bestFoundSolution = currentSolution;
-
-    attributes.put("EVALUATIONS", evaluations);
-    attributes.put("BEST_SOLUTION", bestFoundSolution);
-    attributes.put("CURRENT_SOLUTION", currentSolution);
+    createInitialSolution();
+    initProgress();
 
     while (!termination.isMet(attributes)) {
       S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
@@ -84,6 +78,20 @@ public class SimulatedAnnealing<S extends Solution<?>> implements Algorithm<S> {
       observable.setChanged();
       observable.notifyObservers(attributes);
     }
+  }
+
+  public void initProgress() {
+    evaluations = 1;
+    bestFoundSolution = currentSolution;
+
+    attributes.put("EVALUATIONS", evaluations);
+    attributes.put("BEST_SOLUTION", bestFoundSolution);
+    attributes.put("CURRENT_SOLUTION", currentSolution);
+  }
+
+  public void createInitialSolution() {
+    currentSolution = problem.createSolution();
+    problem.evaluate(currentSolution);
   }
 
   private double compute_acceptance_probability(S currentSolution, S mutatedSolution, double temperature) {
