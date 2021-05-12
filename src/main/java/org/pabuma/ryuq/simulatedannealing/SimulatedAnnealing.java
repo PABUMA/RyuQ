@@ -7,12 +7,7 @@ import org.pabuma.ryuq.simulatedannealing.cooling.CoolingScheme;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
-import org.uma.jmetal.util.observable.Observable;
-import org.uma.jmetal.util.observable.impl.DefaultObservable;
 import org.uma.jmetal.util.pseudorandom.JMetalRandom;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
   private double temperature;
