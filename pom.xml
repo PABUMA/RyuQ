@@ -13,12 +13,39 @@
         <maven.compiler.target>14</maven.compiler.target>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.7.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ajnebro</groupId>
+            <artifactId>jMSA</artifactId>
+            <version>e5a0c017e50d04e083fc2c05f10cffd9554c2b0c</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uma.jmetal</groupId>
+            <artifactId>jmetal-core</artifactId>
+            <version>5.11-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uma.jmetal</groupId>
+            <artifactId>jmetal-problem</artifactId>
+            <version>5.11-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uma.jmetal</groupId>
+            <artifactId>jmetal-experimental</artifactId>
+            <version>5.11-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
