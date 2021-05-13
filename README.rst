@@ -1,3 +1,3 @@
-Project RuyQ: Multiple sequence alignment with trajectory-based metaheuristics
+Project RyuQ: Multiple sequence alignment with trajectory-based metaheuristics
 ==============================================================================
 
