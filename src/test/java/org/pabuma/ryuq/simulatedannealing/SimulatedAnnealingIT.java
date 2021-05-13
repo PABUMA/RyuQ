@@ -41,6 +41,8 @@ class SimulatedAnnealingIT {
             problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(500000),
             1.0, new Geometric(.95)) ;
 
+    simulatedAnnealing.run();
+
     assertTrue(simulatedAnnealing.getResult().objectives()[0] < 0.0001);
   }
 }

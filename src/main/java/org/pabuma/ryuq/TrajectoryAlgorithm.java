@@ -11,6 +11,12 @@ import org.uma.jmetal.util.observable.impl.DefaultObservable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Abstract class representing the behaviour of a generic trajectory-based metaheuristic
+ * @author Antonio J. Nebro
+ *
+ * @param <S> The type of the problem solutions
+ */
 public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algorithm<S> {
   protected Problem<S> problem ;
 
@@ -55,6 +61,9 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
     totalComputingTime = getCurrentComputingTime();
   }
 
+  /**
+   * Method invoked just after the initialization of the algorithm and before the main loop of the algorithm
+   */
   protected void initProgress() {
     evaluations = 1;
 
@@ -68,11 +77,12 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
     observable.notifyObservers(attributes);
   }
 
+  /**
+   * Method invoked at the end of each algorithm iteration
+   */
   protected void updateProgress() {
     evaluations++;
-    if (currentSolution.objectives()[0] < bestFoundSolution.objectives()[0]) {
-      bestFoundSolution = currentSolution ;
-    }
+    bestFoundSolution = updateBestFoundSolution(bestFoundSolution, currentSolution) ;
 
     attributes.put("EVALUATIONS", evaluations);
     attributes.put("BEST_SOLUTION", bestFoundSolution);
@@ -80,6 +90,14 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
     observable.setChanged();
     observable.notifyObservers(attributes);
+  }
+
+  protected S updateBestFoundSolution(S bestFoundSolution, S currentSolution) {
+    if (currentSolution.objectives()[0] < bestFoundSolution.objectives()[0]) {
+      return currentSolution ;
+    } else {
+      return bestFoundSolution ;
+    }
   }
 
   public long getCurrentComputingTime() {
