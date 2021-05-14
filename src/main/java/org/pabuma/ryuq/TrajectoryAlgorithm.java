@@ -15,7 +15,7 @@ import java.util.Map;
  * Abstract class representing the behaviour of a generic trajectory-based metaheuristic
  * @author Antonio J. Nebro
  *
- * @param <S> The type of the problem solutions
+ * @param <S> Generic yype of the problem solutions
  */
 public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algorithm<S> {
   protected Problem<S> problem ;

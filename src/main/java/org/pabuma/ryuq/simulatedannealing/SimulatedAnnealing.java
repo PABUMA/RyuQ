@@ -9,13 +9,18 @@ import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 
+/**
+ * Class implementing a simulated annealing algorithm by extending the {@link TrajectoryAlgorithm} interface.
+ *
+ * @author Antonio J. Nebro
+ * @param <S> Generic yype of the problem solutions
+ */
 public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
+  private static final double minimumTemperature = 0.000001;
   private double temperature;
 
   private MutationOperator<S> mutationOperator;
   private CoolingScheme coolingScheme;
-
-  private double minimumTemperature = 0.000001;
 
   public SimulatedAnnealing(Problem<S> problem,
                             MutationOperator<S> mutation,
@@ -49,7 +54,7 @@ public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorit
     return currentSolution ;
   }
 
-  private double compute_acceptance_probability(S currentSolution, S mutatedSolution, double temperature) {
+  protected double compute_acceptance_probability(S currentSolution, S mutatedSolution, double temperature) {
     double value = (mutatedSolution.objectives()[0] - currentSolution.objectives()[0])
             / Math.max(temperature, minimumTemperature);
     return Math.exp(-1.0 * value);
