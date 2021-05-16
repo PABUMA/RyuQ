@@ -25,4 +25,14 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
   public S upgrade(S currentSolution) {
     return null;
   }
+
+  @Override
+  public String getName() {
+    return "VNS";
+  }
+
+  @Override
+  public String getDescription() {
+    return "Variable Neighbourhood Search";
+  }
 }
