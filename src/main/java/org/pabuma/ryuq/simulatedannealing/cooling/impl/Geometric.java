@@ -17,7 +17,10 @@ public class Geometric implements CoolingScheme {
   }
 
   @Override
-  public double updateTemperature(double temperature) {
+  /**
+   * The iteration number is not needed in this cooling scheme
+   */
+  public double updateTemperature(double temperature, int iteration) {
     return alpha * temperature ;
   }
 

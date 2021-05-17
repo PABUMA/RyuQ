@@ -25,7 +25,8 @@ class LinearTest {
     double beta = 0.1 ;
     Linear coolingScheme = new Linear(beta) ;
     double temperatureValue = 0.25 ;
+    int iteration = 0 ;
 
-    assertEquals(temperatureValue - beta, coolingScheme.updateTemperature(temperatureValue));
+    assertEquals(temperatureValue - beta, coolingScheme.updateTemperature(temperatureValue, iteration));
   }
 }
