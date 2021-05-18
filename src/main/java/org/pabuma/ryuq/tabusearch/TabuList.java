@@ -1,5 +1,7 @@
 package org.pabuma.ryuq.tabusearch;
 
+import org.uma.jmetal.solution.Solution;
+
 public interface TabuList extends Iterable<Solution> {
 
     void add(Solution solution);
