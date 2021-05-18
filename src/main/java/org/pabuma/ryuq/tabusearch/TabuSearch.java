@@ -25,9 +25,9 @@ public class TabuSearch {
         while (!stopCondition.mustStop(++currentIteration, bestSolution)) {
 
             List<Solutions> candidateNeighbors = currentSolution.getNeighbors();
-            List<Solutions> solutionsInTabu = (List<Solutions>) IteratorUtils.toList(tabuList.iterator());
+            List<Solutions> solutionsInTabu =IteratorUtils.toList(tabuList.iterator());
 
-            Solutions bestNeighborFound = (Solutions) solutionLocator.findBestNeighbor(candidateNeighbors, solutionsInTabu);
+            Solutions bestNeighborFound = solutionLocator.findBestNeighbor(candidateNeighbors, solutionsInTabu);
             if (bestNeighborFound.getValue() < bestSolution.getValue()) {
                 bestSolution = bestNeighborFound;
             }
