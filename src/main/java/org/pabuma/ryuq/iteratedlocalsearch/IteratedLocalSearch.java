@@ -22,11 +22,11 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
 
     @Override
     public String getName() {
-        return "VNS";
+        return "ILS";
     }
 
     @Override
     public String getDescription() {
-        return "Variable Neighbourhood Search";
+        return "Iterated local search";
     }
 }
