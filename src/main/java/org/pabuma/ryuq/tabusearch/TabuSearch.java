@@ -3,7 +3,7 @@ package org.pabuma.ryuq.tabusearch;
 import java.util.List;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.uma.jmetal.solution.Solution;
+import org.pabuma.ryuq.tabusearch.Solutions;
 
 public class TabuSearch {
 
@@ -17,17 +17,17 @@ public class TabuSearch {
         this.solutionLocator = solutionLocator;
     }
 
-    public Solution run(Solution initialSolution) {
-        Solution bestSolution = initialSolution;
-        Solution currentSolution = initialSolution;
+    public Solutions run(Solutions initialSolution) {
+        Solutions bestSolution = initialSolution;
+        Solutions currentSolution = initialSolution;
 
         Integer currentIteration = 0;
         while (!stopCondition.mustStop(++currentIteration, bestSolution)) {
 
-            List<Solution> candidateNeighbors = currentSolution.getNeighbors();
-            List<Solution> solutionsInTabu = IteratorUtils.toList(tabuList.iterator());
+            List<Solutions> candidateNeighbors = currentSolution.getNeighbors();
+            List<Solutions> solutionsInTabu = (List<Solutions>) IteratorUtils.toList(tabuList.iterator());
 
-            Solution bestNeighborFound = solutionLocator.findBestNeighbor(candidateNeighbors, solutionsInTabu);
+            Solutions bestNeighborFound = (Solutions) solutionLocator.findBestNeighbor(candidateNeighbors, solutionsInTabu);
             if (bestNeighborFound.getValue() < bestSolution.getValue()) {
                 bestSolution = bestNeighborFound;
             }

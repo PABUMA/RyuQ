@@ -1,11 +1,11 @@
 package org.pabuma.ryuq.tabusearch;
 import java.util.List;
 
-public interface Solution {
+public interface Solutions {
 
 
     Double getValue();
 
-    List<Solution> getNeighbors();
+    List<Solutions> getNeighbors();
 
 }

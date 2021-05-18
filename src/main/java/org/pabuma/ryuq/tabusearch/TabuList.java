@@ -2,12 +2,12 @@ package org.pabuma.ryuq.tabusearch;
 
 import org.uma.jmetal.solution.Solution;
 
-public interface TabuList extends Iterable<Solution> {
+public interface TabuList extends Iterable<Solutions> {
 
-    void add(Solution solution);
+    void add(Solutions solution);
 
-    Boolean contains(Solution solution);
+    Boolean contains(Solutions solution);
 
-    void updateSize(Integer currentIteration, Solution bestSolutionFound);
+    void updateSize(Integer currentIteration, Solutions bestSolutionFound);
 
 }

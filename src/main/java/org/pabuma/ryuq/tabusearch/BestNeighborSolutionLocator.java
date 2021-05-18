@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface BestNeighborSolutionLocator {
 
-    Solution findBestNeighbor(List<Solution> neighborsSolutions, List<Solution> solutionsInTabu);
+    Solutions findBestNeighbor(List<Solutions> neighborsSolutions, List<Solutions> solutionsInTabu);
 
 }

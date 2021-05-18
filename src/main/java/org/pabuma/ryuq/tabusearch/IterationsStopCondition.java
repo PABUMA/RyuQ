@@ -9,9 +9,8 @@ public class IterationsStopCondition implements StopCondition {
     }
 
     @Override
-    public Boolean mustStop(Integer currentIteration, Solution bestSolutionFound) {
+    public Boolean mustStop(Integer currentIteration, Solutions bestSolutionFound) {
         return currentIteration >= maxIterations;
     }
-
 }
 

@@ -1,34 +1,34 @@
 package org.pabuma.ryuq.tabusearch;
+
 import java.util.Iterator;
 
 import org.apache.commons.collections4.queue.CircularFifoQueue;
-import org.uma.jmetal.solution.Solution;
 
 public final class StaticTabuList implements TabuList {
 
-    private CircularFifoQueue<Solution> tabuList;
+    private CircularFifoQueue<Solutions> tabuList;
 
     public StaticTabuList(Integer size) {
-        this.tabuList = new CircularFifoQueue<Solution>(size);
+        this.tabuList = new CircularFifoQueue<Solutions>(size);
     }
 
     @Override
-    public void add(Solution solution) {
+    public void add(Solutions solution) {
         tabuList.add(solution);
     }
 
     @Override
-    public Boolean contains(Solution solution) {
+    public Boolean contains(Solutions solution) {
         return tabuList.contains(solution);
     }
 
     @Override
-    public Iterator<Solution> iterator() {
+    public Iterator<Solutions> iterator() {
         return tabuList.iterator();
     }
 
     @Override
-    public void updateSize(Integer currentIteration, Solution bestSolutionFound) {
+    public void updateSize(Integer currentIteration, Solutions bestSolutionFound) {
         //Do nothing, this implementation has a fixed size
     }
 
