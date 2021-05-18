@@ -49,7 +49,7 @@ public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorit
       }
     }
 
-    temperature = coolingScheme.updateTemperature(temperature);
+    temperature = coolingScheme.updateTemperature(temperature, evaluations);
 
     return currentSolution ;
   }
