@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.github.ajnebro</groupId>
             <artifactId>jMSA</artifactId>
-            <version>e5a0c017e50d04e083fc2c05f10cffd9554c2b0c</version>
+            <version>76f1e66324e4679a792f1e6246a6e235fee468d0</version>
         </dependency>
         <dependency>
             <groupId>org.uma.jmetal</groupId>
@@ -50,6 +50,11 @@
             <groupId>org.uma.jmetal</groupId>
             <artifactId>jmetal-problem</artifactId>
             <version>5.11-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.biojava</groupId>
+            <artifactId>biojava-core</artifactId>
+            <version>5.4.0</version>
         </dependency>
     </dependencies>
 
