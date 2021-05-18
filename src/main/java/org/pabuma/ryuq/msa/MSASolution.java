@@ -7,6 +7,10 @@ import org.uma.jmetal.util.binarySet.BinarySet;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class representing a multiple sequence alignment (MSA). Each sequence is stored as a {@link StringBuilder}
+ * object. It is assumed that the MSA is already aligned.
+ */
 public class MSASolution extends AbstractSolution<StringBuilder> {
 
   /**

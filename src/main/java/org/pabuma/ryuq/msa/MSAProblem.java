@@ -7,16 +7,18 @@ import org.jmsa.score.impl.Entropy;
 import org.jmsa.score.impl.PercentageOfTotallyConservedColumns;
 import org.jmsa.score.impl.SumOfPairs;
 import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
+import org.pabuma.ryuq.msa.neighborhood.RandomGapInsertion;
 import org.uma.jmetal.problem.Problem;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
+/**
+ * Class representing multiple sequence alignment (MSA) optimization problems. The data defining the
+ * MSA is read from a Fasta file, and it is assumed that the MSA is aligned.
+ */
 public class MSAProblem implements Problem<MSASolution> {
   private List<StringBuilder> sequences ;
   private List<String> sequenceNames ;
@@ -94,7 +96,7 @@ public class MSAProblem implements Problem<MSASolution> {
             sequences = FastaReaderHelper.readFastaProteinSequence(new File(fastaFile));
 
     for (Map.Entry<String, ProteinSequence> entry : sequences.entrySet()) {
-      sequenceNameList.add(new String(entry.getValue().getOriginalHeader()));
+      sequenceNameList.add(entry.getValue().getOriginalHeader());
     }
 
     return sequenceNameList;
@@ -111,7 +113,12 @@ public class MSAProblem implements Problem<MSASolution> {
 
     MSASolution solution = msa.createSolution() ;
     msa.evaluate(solution) ;
-    int a = 0 ;
     System.out.println(solution) ;
+
+    System.out.println("Sequence length: " + solution.variables().size()) ;
+
+    MSASolution mutatedSolution = new RandomGapInsertion(1).execute(solution) ;
+    System.out.println("Sequence length: " + mutatedSolution.variables().size()) ;
+
   }
 }
