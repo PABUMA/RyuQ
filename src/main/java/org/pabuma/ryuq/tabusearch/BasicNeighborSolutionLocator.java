@@ -11,26 +11,29 @@ import org.apache.commons.collections4.Predicate;
    
 public class BasicNeighborSolutionLocator implements BestNeighborSolutionLocator {
 
-     @Override
-     public Solution findBestNeighbor(List<Solution> neighborsSolutions, final List<Solution> solutionsInTabu) {
- 
-         CollectionUtils.filterInverse(neighborsSolutions, new Predicate<Solution>() {
-             @Override
-             public boolean evaluate(Solution neighbor) {
-                 return solutionsInTabu.contains(neighbor);
-             }
-         });
+    public Solution findBestNeighbor(List<Solution> neighborsSolutions, final List<Solution> solutionsInTabu) {
+
+        CollectionUtils.filterInverse(neighborsSolutions, new Predicate<Solution>() {
+            @Override
+            public boolean evaluate(Solution neighbor) {
+                return solutionsInTabu.contains(neighbor);
+            }
+        });
 
 
-         Collections.sort(neighborsSolutions, new Comparator<Solution>() {
-             @Override
-             public int compare(Solution a, Solution b) {
-                 return a.getValue().compareTo(b.getValue());
-             }
-         });
-            
-         return neighborsSolutions.get(0);
-     }
+        Collections.sort(neighborsSolutions, new Comparator<Solution>() {
+            @Override
+            public int compare(Solution a, Solution b) {
+                return a.getValue().compareTo(b.getValue());
+            }
+        });
 
+        return neighborsSolutions.get(0);
+    }
+
+    @Override
+    public org.uma.jmetal.solution.Solution findBestNeighbor(List<org.uma.jmetal.solution.Solution> neighborsSolutions, List<org.uma.jmetal.solution.Solution> solutionsInTabu) {
+        return null;
     }
 }
+
