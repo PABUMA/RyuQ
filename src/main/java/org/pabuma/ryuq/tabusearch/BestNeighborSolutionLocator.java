@@ -1,5 +1,4 @@
 package org.pabuma.ryuq.tabusearch;
-import org.uma.jmetal.solution.Solution;
 
 import java.util.List;
 

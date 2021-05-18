@@ -3,7 +3,6 @@ package org.pabuma.ryuq.tabusearch;
 import java.util.List;
 
 import org.apache.commons.collections4.IteratorUtils;
-import org.pabuma.ryuq.tabusearch.Solutions;
 
 public class TabuSearch {
 
