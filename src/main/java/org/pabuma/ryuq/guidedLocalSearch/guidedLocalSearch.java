@@ -19,6 +19,7 @@ public class guidedLocalSearch <S extends Solution<?>> extends TrajectoryAlgorit
                 MutationOperator<S> mutation,
                 CreateInitialSolution<S> createInitialSolution,
                 TerminationCondition terminationCriterion) {
+
             super(problem, createInitialSolution, terminationCriterion) ;
             this.mutationOperator = mutation;
         }

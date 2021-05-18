@@ -27,7 +27,7 @@ public class guidedLocalSearchBinaryExample {
         BinarySolution currentSolution = problem.createSolution() ;
         problem.evaluate(currentSolution) ;
 
-        while () {
+        while (true) {
             BinarySolution mutatedSolution = mutation.execute((BinarySolution) currentSolution.copy()) ;
             problem.evaluate(mutatedSolution) ;
 
@@ -37,8 +37,7 @@ public class guidedLocalSearchBinaryExample {
 
         }
 
-        guidedLocalSearch<BinarySolution> guidedLocalSearch = new guidedLocalSearch<>(
-                problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
+        guidedLocalSearch<BinarySolution> guidedLocalSearch = new guidedLocalSearch<>(problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
 
         guidedLocalSearch.run();
 
