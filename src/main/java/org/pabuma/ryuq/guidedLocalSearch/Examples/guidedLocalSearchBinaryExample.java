@@ -20,23 +20,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class guidedLocalSearchBinaryExample {
     @Test
     public void shouldGuidedLocalSearchWorkProperlyWhenSolvingTheOneMaxProblem() {
+
         int bits = 1024;
         BinaryProblem problem = new OneMax(bits);
         MutationOperator<BinarySolution> mutation = new BitFlipMutation(1.0 / bits);
 
-        BinarySolution currentSolution = problem.createSolution() ;
-        problem.evaluate(currentSolution) ;
+        BinarySolution currentSolution = problem.createSolution();
+        problem.evaluate(currentSolution);
 
-        while (true) {
+
+        int evaluationCounter=1;
+
+        while (evaluationCounter<10000) {
             BinarySolution mutatedSolution = mutation.execute((BinarySolution) currentSolution.copy()) ;
             problem.evaluate(mutatedSolution) ;
+            evaluationCounter++;
 
             if (currentSolution.objectives()[0] < mutatedSolution.objectives()[0]) {
-
+                    currentSolution=mutatedSolution;
             }
 
-        }
 
+        }
         guidedLocalSearch<BinarySolution> guidedLocalSearch = new guidedLocalSearch<>(problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
 
         guidedLocalSearch.run();
