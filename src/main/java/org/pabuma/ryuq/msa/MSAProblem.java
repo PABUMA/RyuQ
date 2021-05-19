@@ -115,10 +115,9 @@ public class MSAProblem implements Problem<MSASolution> {
     msa.evaluate(solution) ;
     System.out.println(solution) ;
 
-    System.out.println("Sequence length: " + solution.variables().size()) ;
+    System.out.println("Sequence length: " + solution.variables().get(0).length()) ;
 
     MSASolution mutatedSolution = new RandomGapInsertion(1).execute(solution) ;
-    System.out.println("Sequence length: " + mutatedSolution.variables().size()) ;
-
+    System.out.println("Sequence length: " + mutatedSolution.variables().get(0).length()) ;
   }
 }

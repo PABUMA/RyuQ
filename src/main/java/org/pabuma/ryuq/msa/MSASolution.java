@@ -2,7 +2,6 @@ package org.pabuma.ryuq.msa;
 
 import org.uma.jmetal.solution.AbstractSolution;
 import org.uma.jmetal.solution.Solution;
-import org.uma.jmetal.util.binarySet.BinarySet;
 
 import java.util.HashMap;
 import java.util.List;

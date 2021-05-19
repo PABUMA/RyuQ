@@ -4,15 +4,19 @@ import org.pabuma.ryuq.msa.MSASolution;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 
+import java.util.function.Consumer;
+import java.util.stream.IntStream;
+
 public class RandomGapInsertion implements MutationOperator<MSASolution> {
   private double mutationProbability;
 
   public RandomGapInsertion(double mutationProbability) {
     if ((mutationProbability < 0.0) || (mutationProbability > 1.0)) {
-      throw new RuntimeException("Invalid mutation probability value: " + mutationProbability) ;
+      throw new RuntimeException("Invalid mutation probability value: " + mutationProbability);
     }
-    this.mutationProbability = mutationProbability ;
+    this.mutationProbability = mutationProbability;
   }
+
   @Override
   public double getMutationProbability() {
     return mutationProbability;
@@ -21,16 +25,25 @@ public class RandomGapInsertion implements MutationOperator<MSASolution> {
   @Override
   public MSASolution execute(MSASolution solution) {
     if (null == solution) {
-      throw new RuntimeException("Null solution") ;
+      throw new RuntimeException("Null solution");
     }
 
-    for (var i = 0; i  < solution.variables().size(); i++) {
-      if (JMetalRandom.getInstance().nextDouble() < mutationProbability) {
-        StringBuilder currentSequence = solution.variables().get(i) ;
-        int randomPosition = JMetalRandom.getInstance().nextInt(0, currentSequence.length());
-        currentSequence.insert(randomPosition, "-");
-      }
-    }
-    return solution ;
+    //for (int i = 0; i  < solution.variables().size(); i++) {
+    //  if (JMetalRandom.getInstance().nextDouble() < mutationProbability) {
+    //    StringBuilder sequence = solution.variables().get(i) ;
+    //    int randomPosition = JMetalRandom.getInstance().nextInt(0, sequence.length());
+    //    sequence.insert(randomPosition, "-");
+    //}
+    //}
+
+    IntStream
+            .range(0, solution.variables().size())
+            .filter(i -> JMetalRandom.getInstance().nextDouble() < mutationProbability)
+            .mapToObj(i -> solution.variables().get(i))
+            .forEach(sequence ->
+                    sequence.insert(JMetalRandom.getInstance().nextInt(0, sequence.length()), "-"));
+
+    return solution;
   }
+
 }
