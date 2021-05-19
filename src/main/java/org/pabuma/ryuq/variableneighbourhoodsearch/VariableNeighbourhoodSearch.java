@@ -14,15 +14,45 @@ import org.uma.jmetal.solution.Solution;
  * @param <S> Generic type of the problem solutions
  */
 public class VariableNeighbourhoodSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
+  int k_max;
   public VariableNeighbourhoodSearch(
       Problem<S> problem,
       CreateInitialSolution<S> createInitialSolution,
-      TerminationCondition terminationCondition) {
+      TerminationCondition terminationCondition,
+      int k_max) {
     super(problem, createInitialSolution, terminationCondition);
+    this.k_max = k_max;
   }
 
   @Override
   public S upgrade(S currentSolution) {
+    int k = 1;
+    while (k <= k_max) {
+      // Step 1: Shaking
+      S mutatedSolution = shake(currentSolution, k);
+      problem.evaluate(mutatedSolution);
+
+      // Step 2: Local search
+      S mutatedSolution2 = null;
+
+      // Step 3: Neighbourhood change (move)
+      if (mutatedSolution2.objectives()[0] < currentSolution.objectives()[0]) {
+        currentSolution = mutatedSolution2;
+        k = 1;
+      } else {
+        k++;
+      }
+    }
+    return currentSolution;
+  }
+
+  /**
+   * Shake function generates a point y randomly from the k-th neighbourhood of x
+   * @param solution
+   * @param k
+   * @return
+   */
+  public S shake(S solution, int k) {
     return null;
   }
 
