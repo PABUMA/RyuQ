@@ -18,7 +18,7 @@ import java.util.List;
 public class SimulatedAnnealingMSAExample {
   public static void main(String[] args) throws Exception {
     SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("resources/PAM250Matrix");
-    MSAProblem problem = new MSAProblem("resources/BB11001.fasta",
+    MSAProblem problem = new MSAProblem("resources/BB11001.tfa_clu",
             List.of(new SumOfPairs(substitutionMatrix)));
     MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
