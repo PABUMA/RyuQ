@@ -29,7 +29,7 @@ class SimulatedAnnealingIT {
 
     simulatedAnnealing.run();
 
-    assertTrue(simulatedAnnealing.getResult().objectives()[0] * -1 > 1000);
+    assertTrue(simulatedAnnealing.getResult().objectives()[0] * -1 > 1010);
   }
 
   @Test
