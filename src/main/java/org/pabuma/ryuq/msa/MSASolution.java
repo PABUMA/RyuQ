@@ -5,6 +5,7 @@ import org.uma.jmetal.solution.Solution;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Class representing a multiple sequence alignment (MSA). Each sequence is stored as a {@link StringBuilder}
@@ -55,5 +56,23 @@ public class MSASolution extends AbstractSolution<StringBuilder> {
   @Override
   public Solution copy() {
     return new MSASolution(this);
+  }
+
+  public void removeGapColumns() {
+    for (int i = 0; i < variables().get(0).length(); i++) {
+      if (columnHasOnlyGaps(i)) {
+        removeColumn(i) ;
+      }
+    }
+  }
+
+  private boolean columnHasOnlyGaps(int index) {
+    int numberColumnsWithGaps = (int) variables().stream().filter(sequence -> sequence.charAt(index) == '-').count();
+
+    return numberColumnsWithGaps == variables().size() ;
+  }
+
+  private void removeColumn(int index) {
+    variables().forEach(sequence -> sequence.deleteCharAt(index));
   }
 }
