@@ -23,8 +23,12 @@ public class SimulatedAnnealingMSAExample {
     MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
     SimulatedAnnealing<MSASolution> simulatedAnnealing = new SimulatedAnnealing<>(
-            problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(1000000),
-            1.0, new Geometric(.95));
+            problem,
+            mutation,
+            new DefaultSolutionCreation<>(problem),
+            new TerminationByEvaluations(1000000),
+            1.0,
+            new Geometric(.95));
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
     simulatedAnnealing.getObservable().register(objectivesObserver);
@@ -36,7 +40,7 @@ public class SimulatedAnnealingMSAExample {
 
     problem.writeSequencesToFasta(simulatedAnnealing.getResult().variables(), "output.FASTA");
 
-    simulatedAnnealing.getResult().variables().forEach(i -> System.out.println(i));
+    simulatedAnnealing.getResult().variables().forEach(System.out::println);
     problem.printMSAScores(simulatedAnnealing.getResult(), List.of(new Entropy(), new Star(substitutionMatrix),
             new SumOfPairs(substitutionMatrix), new PercentageOfTotallyConservedColumns(), new PercentageOfNonGaps()));
   }
