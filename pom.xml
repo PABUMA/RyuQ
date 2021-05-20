@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.github.ajnebro</groupId>
             <artifactId>jMSA</artifactId>
-            <version>76f1e66324e4679a792f1e6246a6e235fee468d0</version>
+            <version>2eaa69c0ce470c98421789805987114b6260d3c2</version>
         </dependency>
         <dependency>
             <groupId>org.uma.jmetal</groupId>

@@ -4,11 +4,6 @@ import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
 import org.biojava.nbio.core.sequence.io.FastaWriterHelper;
 import org.jmsa.score.Score;
-import org.jmsa.score.impl.Entropy;
-import org.jmsa.score.impl.PercentageOfTotallyConservedColumns;
-import org.jmsa.score.impl.SumOfPairs;
-import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
-import org.pabuma.ryuq.msa.mutation.RandomGapInsertion;
 import org.uma.jmetal.problem.Problem;
 
 import java.io.File;
@@ -119,22 +114,11 @@ public class MSAProblem implements Problem<MSASolution> {
     return sequenceNameList;
   }
 
-
-  public static void main(String[] args) throws IOException {
-    MSAProblem msa = new MSAProblem("resources/BB11001.fasta",
-            List.of(new PercentageOfTotallyConservedColumns(), new Entropy(),
-                    new SumOfPairs(new GenericSubstitutionMatrix("resources/PAM250Matrix"))));
-
-    System.out.println(msa.sequenceNames);
-    System.out.println(msa.sequences);
-
-    MSASolution solution = msa.createSolution();
-    msa.evaluate(solution);
-    System.out.println(solution);
-
-    System.out.println("Sequence length: " + solution.variables().get(0).length());
-
-    MSASolution mutatedSolution = new RandomGapInsertion(1).execute(solution);
-    System.out.println("Sequence length: " + mutatedSolution.variables().get(0).length());
+  public void printMSAScores(MSASolution solution, List<Score> scores) {
+    char[][] decodedSolution = decodeSequences(solution.variables());
+    System.out.println("\nSCORES") ;
+    for (Score score : scores) {
+      System.out.println(score.name() + ": " + score.compute(decodedSolution));
+    }
   }
 }
