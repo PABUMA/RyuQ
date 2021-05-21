@@ -6,7 +6,8 @@ import java.util.Map;
 
 /**
  * Class that allows to check the termination condition when the computing time of an algorithm
- * gets higher than a given threshold.
+ * gets higher than a given threshold. The {@link #isMet(Map)} method assumes that the map parameter has a {@link Long}
+ * field called "COMPUTING_TIME".
  *
  *  @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
