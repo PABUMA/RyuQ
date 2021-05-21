@@ -1,14 +1,15 @@
 package org.pabuma.ryuq.simulatedannealing.cooling.impl;
 
+import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LinearTest {
+class ExponentialTest {
   @Test
   public void shouldConstructorCreateAValidObject() {
     double beta = 0.5;
-    Linear coolingScheme = new Linear(beta);
+    Exponential coolingScheme = new Exponential(beta);
 
     assertNotNull(coolingScheme);
     assertEquals(beta, coolingScheme.getBeta());
@@ -23,10 +24,12 @@ class LinearTest {
   @Test
   public void shouldUpdateTemperatureWorkProperly() {
     double beta = 0.1 ;
-    Linear coolingScheme = new Linear(beta) ;
+    Exponential coolingScheme = new Exponential(beta) ;
     double temperatureValue = 0.25 ;
     int iteration = 0 ;
 
-    assertEquals(temperatureValue - beta, coolingScheme.updateTemperature(temperatureValue, iteration));
+    double expectedValue = temperatureValue / (1 + beta*temperatureValue) ;
+
+    assertEquals(expectedValue, coolingScheme.updateTemperature(temperatureValue, iteration));
   }
 }
