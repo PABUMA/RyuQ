@@ -18,9 +18,7 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class guidedLocalSearchBinaryExample {
-    @Test
-    public void shouldGuidedLocalSearchWorkProperlyWhenSolvingTheOneMaxProblem() {
-
+    public static void main(String[] args) {
         int bits = 1024;
         BinaryProblem problem = new OneMax(bits);
         MutationOperator<BinarySolution> mutation = new BitFlipMutation(1.0 / bits);
