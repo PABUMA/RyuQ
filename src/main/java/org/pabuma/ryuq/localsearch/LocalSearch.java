@@ -25,6 +25,12 @@ public class LocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
     this.numberOfIterationsWithoutImprovement = 0 ;
   }
 
+  public LocalSearch(Problem<S> problem,
+                     MutationOperator<S> mutation,
+                     TerminationCondition terminationCriterion) {
+    this(problem, mutation, null, terminationCriterion) ;
+  }
+
   @Override
   public S upgrade(S currentSolution) {
     S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());

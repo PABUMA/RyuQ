@@ -27,4 +27,8 @@ public class TerminationByLimitOfIterationsWithoutImprovement implements Termina
 
     return (numberOfIterationsWithoutImprovement >= maximumNumberOfIterationsWithoutImprovement) ;
   }
+
+  public int getMaximumNumberOfIterationsWithoutImprovement() {
+    return maximumNumberOfIterationsWithoutImprovement ;
+  }
 }

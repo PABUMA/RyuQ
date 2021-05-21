@@ -12,25 +12,29 @@ import java.util.Map;
  *  @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class TerminationByComputingTime implements TerminationCondition {
-  private long maxComputingTime ;
+  private long maximumComputingTime;
   private int evaluations ;
 
-  public TerminationByComputingTime(int maxComputingTime) {
-    this.maxComputingTime = maxComputingTime ;
+  public TerminationByComputingTime(long maxComputingTime) {
+    this.maximumComputingTime = maxComputingTime ;
     this.evaluations = 0 ;
   }
 
   @Override
   public boolean isMet(Map<String, Object> algorithmStatusData) {
-    Long currentComputingTime = (Long) algorithmStatusData.get("COMPUTING_TIME") ;
-    if (currentComputingTime ==  algorithmStatusData.get("COMPUTING_TIME")) {
+    if (null ==  algorithmStatusData.get("COMPUTING_TIME")) {
       throw new RuntimeException("The COMPUTING_TIME field is null") ;
     }
+    int currentComputingTime = (int) algorithmStatusData.get("COMPUTING_TIME") ;
 
-    return currentComputingTime >= maxComputingTime ;
+    return currentComputingTime >= maximumComputingTime;
   }
 
   public int getEvaluations() {
     return evaluations ;
+  }
+
+  public long getMaximumComputingTime() {
+    return maximumComputingTime;
   }
 }
