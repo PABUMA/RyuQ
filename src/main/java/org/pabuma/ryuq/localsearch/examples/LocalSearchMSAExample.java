@@ -23,10 +23,12 @@ public class LocalSearchMSAExample {
             List.of(new SumOfPairs(substitutionMatrix)));
     MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
+    MSASolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
     LocalSearch<MSASolution> localSearch = new LocalSearch<>(
             problem,
             mutation,
-            new DefaultSolutionCreation<>(problem),
+            initialSolution,
             new TerminationByEvaluations(1000000));
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);

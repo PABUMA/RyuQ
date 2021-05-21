@@ -18,8 +18,10 @@ public class LocalSearchBinaryExample {
     BinaryProblem problem = new OneMax(bits) ;
     MutationOperator<BinarySolution> mutation = new BitFlipMutation(1.0/bits) ;
 
+    BinarySolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
     LocalSearch<BinarySolution> localSearch = new LocalSearch<>(
-            problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000)) ;
+            problem, mutation, initialSolution, new TerminationByEvaluations(20000)) ;
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1000) ;
     localSearch.getObservable().register(objectivesObserver);

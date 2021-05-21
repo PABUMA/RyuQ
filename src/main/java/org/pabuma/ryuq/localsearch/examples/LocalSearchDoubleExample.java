@@ -17,8 +17,10 @@ public class LocalSearchDoubleExample {
     DoubleProblem problem = new Rastrigin(20) ;
     MutationOperator<DoubleSolution> mutation = new PolynomialMutation(1.0/problem.getNumberOfVariables(), 20.0) ;
 
+    DoubleSolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
     LocalSearch<DoubleSolution> localSearch = new LocalSearch<>(
-            problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(500000)) ;
+            problem, mutation, initialSolution, new TerminationByEvaluations(500000)) ;
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(10000) ;
     localSearch.getObservable().register(objectivesObserver);

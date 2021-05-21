@@ -20,9 +20,9 @@ public class LocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
 
   public LocalSearch(Problem<S> problem,
                      MutationOperator<S> mutation,
-                     CreateInitialSolution<S> createInitialSolution,
+                     S initialSolution,
                      TerminationCondition terminationCriterion) {
-    super(problem, createInitialSolution, terminationCriterion) ;
+    super(problem, initialSolution, terminationCriterion) ;
     this.mutationOperator = mutation;
   }
 

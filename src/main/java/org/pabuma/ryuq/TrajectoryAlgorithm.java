@@ -22,7 +22,7 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
   // Algorithm components
   protected TerminationCondition terminationCondition;
-  protected CreateInitialSolution<S> initialSolutionGeneration;
+  protected S initialSolution;
 
   // State variables
   protected long initTime;
@@ -36,6 +36,17 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
   protected Map<String, Object> attributes;
 
   public TrajectoryAlgorithm(Problem<S> problem,
+                             S initialSolution,
+                             TerminationCondition terminationCondition) {
+    this.problem = problem ;
+    this.initialSolution = initialSolution;
+    this.terminationCondition = terminationCondition;
+
+    this.observable = new DefaultObservable<>("Trajectory-based Algorithm");
+    this.attributes = new HashMap<>();
+  }
+  /*
+  public TrajectoryAlgorithm(Problem<S> problem,
                              CreateInitialSolution<S> createInitialSolution,
                              TerminationCondition terminationCondition) {
     this.problem = problem ;
@@ -45,13 +56,13 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
     this.observable = new DefaultObservable<>("Trajectory-based Algorithm");
     this.attributes = new HashMap<>();
   }
-
+  */
   public abstract S upgrade(S currentSolution) ;
 
   @Override
   public void run() {
     initTime = System.currentTimeMillis();
-    currentSolution = initialSolutionGeneration.create();
+    currentSolution = initialSolution ;
     problem.evaluate(currentSolution) ;
     initProgress();
     while (!terminationCondition.isMet(attributes)) {

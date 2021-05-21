@@ -24,11 +24,11 @@ public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorit
 
   public SimulatedAnnealing(Problem<S> problem,
                             MutationOperator<S> mutation,
-                            CreateInitialSolution<S> createInitialSolution,
+                            S initialSolution,
                             TerminationCondition terminationCriterion,
                             double initialTemperature,
                             CoolingScheme coolingScheme) {
-    super(problem, createInitialSolution, terminationCriterion) ;
+    super(problem, initialSolution, terminationCriterion) ;
     this.mutationOperator = mutation;
     this.temperature = initialTemperature;
     this.coolingScheme = coolingScheme;
