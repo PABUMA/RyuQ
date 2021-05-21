@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Class that allows to check the termination condition according to a maximum number of evaluations.
  *
- *  @author Antonio J. Nebro <antonio@lcc.uma.es> 
+ *  @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class TerminationByEvaluations implements TerminationCondition {
   private int maximumNumberOfEvaluations ;
