@@ -12,7 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Abstract class representing the behaviour of a generic trajectory-based metaheuristic
+ * Abstract class representing generic trajectory-based metaheuristics. The behaviour of the algorithms is defined
+ * in the {@link #run} method, which stars with an initial solution that will be improved iteratively. The initial
+ * solution can be set in a constructor or by calling the {@link #setInitialSolution(Solution)} method.
+ *
  * @author Antonio J. Nebro
  *
  * @param <S> Generic yype of the problem solutions
@@ -50,18 +53,7 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
                              TerminationCondition terminationCondition) {
     this(problem, null, terminationCondition) ;
   }
-  /*
-  public TrajectoryAlgorithm(Problem<S> problem,
-                             CreateInitialSolution<S> createInitialSolution,
-                             TerminationCondition terminationCondition) {
-    this.problem = problem ;
-    this.initialSolutionGeneration = createInitialSolution;
-    this.terminationCondition = terminationCondition;
 
-    this.observable = new DefaultObservable<>("Trajectory-based Algorithm");
-    this.attributes = new HashMap<>();
-  }
-  */
   public abstract S upgrade(S currentSolution) ;
 
   @Override
