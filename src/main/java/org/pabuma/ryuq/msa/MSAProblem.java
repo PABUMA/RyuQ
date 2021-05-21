@@ -7,7 +7,7 @@ import org.jmsa.score.impl.Entropy;
 import org.jmsa.score.impl.PercentageOfTotallyConservedColumns;
 import org.jmsa.score.impl.SumOfPairs;
 import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
-import org.pabuma.ryuq.msa.neighborhood.RandomGapInsertion;
+import org.pabuma.ryuq.msa.mutation.RandomGapInsertion;
 import org.uma.jmetal.problem.Problem;
 
 import java.io.File;
