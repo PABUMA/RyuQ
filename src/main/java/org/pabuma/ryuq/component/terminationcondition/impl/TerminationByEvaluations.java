@@ -18,7 +18,10 @@ public class TerminationByEvaluations implements TerminationCondition {
 
   @Override
   public boolean isMet(Map<String, Object> algorithmStatusData) {
-    int currentNumberOfEvaluations = (int) algorithmStatusData.get("EVALUATIONS") ;
+    Integer currentNumberOfEvaluations = (Integer) algorithmStatusData.get("EVALUATIONS") ;
+    if (null == currentNumberOfEvaluations) {
+      throw new RuntimeException("The EVALUATIONS field is null") ;
+    }
 
     return (currentNumberOfEvaluations >= maximumNumberOfEvaluations) ;
   }

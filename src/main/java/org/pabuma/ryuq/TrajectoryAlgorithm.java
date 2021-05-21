@@ -45,6 +45,11 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
     this.observable = new DefaultObservable<>("Trajectory-based Algorithm");
     this.attributes = new HashMap<>();
   }
+
+  public TrajectoryAlgorithm(Problem<S> problem,
+                             TerminationCondition terminationCondition) {
+    this(problem, null, terminationCondition) ;
+  }
   /*
   public TrajectoryAlgorithm(Problem<S> problem,
                              CreateInitialSolution<S> createInitialSolution,
@@ -61,6 +66,9 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
   @Override
   public void run() {
+    if (null == initialSolution) {
+      throw new RuntimeException("The initial solution is null") ;
+    }
     initTime = System.currentTimeMillis();
     currentSolution = initialSolution ;
     problem.evaluate(currentSolution) ;
@@ -111,6 +119,10 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
     }
   }
 
+  public void setInitialSolution(S initialSolution) {
+    this.initialSolution = initialSolution ;
+  }
+
   public long getCurrentComputingTime() {
     return System.currentTimeMillis() - initTime;
   }
@@ -121,6 +133,10 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
   public Observable<Map<String, Object>> getObservable() {
     return observable ;
+  }
+
+  public int getEvaluations() {
+    return evaluations ;
   }
 
   @Override
