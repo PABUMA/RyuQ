@@ -11,20 +11,21 @@ import java.util.ArrayList;
 
 public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
 
-    private ArrayList<S> history;
     private S localSearchSolution;
+    private MutationOperator<S> mutationOperator;
 
     public IteratedLocalSearch(Problem<S> problem,
+                               MutationOperator<S> mutation,
                                CreateInitialSolution<S> createInitialSolution,
                                TerminationCondition terminationCriterion){
         super(problem, createInitialSolution, terminationCriterion);
+        this.mutationOperator = mutation;
         this.localSearchSolution = LocalSearch(createInitialSolution.create());
     }
 
     @Override
     public S upgrade(S currentSolution) {
-        // currentSolution = localSearchSolution;
-        S locMinSolution = perturbation(currentSolution, history);
+        S locMinSolution = perturbation(currentSolution, 4);
         problem.evaluate(locMinSolution);
         S localSearchSolution2 = LocalSearch(locMinSolution);
         if (localSearchSolution2.objectives()[0] < currentSolution.objectives()[0]){
@@ -34,15 +35,21 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
     }
 
     public S LocalSearch(S currentSolution){
-       /* if (x < currentSolution.objectives()[0]) {
-        *   currentSolution = x;
-        * }
-        */
-        return currentSolution ;
+        S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
+        problem.evaluate(mutatedSolution);
+        if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
+            currentSolution = mutatedSolution;
+        }
+        return currentSolution;
     }
 
-    public S perturbation(S currentSolution, ArrayList<S> history){
-        return null;
+    public S perturbation(S currentSolution, int n){
+        for (int i = 0; i < n; i ++){
+            S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
+            problem.evaluate(mutatedSolution);
+            currentSolution = mutatedSolution;
+        }
+        return currentSolution;
     }
 
     @Override
