@@ -112,6 +112,7 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
   public void setInitialSolution(S initialSolution) {
     this.initialSolution = initialSolution ;
+    this.bestFoundSolution = initialSolution ;
   }
 
   public long getCurrentComputingTime() {
