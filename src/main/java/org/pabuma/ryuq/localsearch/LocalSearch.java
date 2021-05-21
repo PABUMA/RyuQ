@@ -17,6 +17,7 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom;
  */
 public class LocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
   private MutationOperator<S> mutationOperator;
+  private int numberOfIterationsWithoutImprovement ;
 
   public LocalSearch(Problem<S> problem,
                      MutationOperator<S> mutation,
@@ -24,6 +25,7 @@ public class LocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
                      TerminationCondition terminationCriterion) {
     super(problem, initialSolution, terminationCriterion) ;
     this.mutationOperator = mutation;
+    this.numberOfIterationsWithoutImprovement = 0 ;
   }
 
   @Override
@@ -33,9 +35,24 @@ public class LocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
 
     if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
       currentSolution = mutatedSolution;
+      numberOfIterationsWithoutImprovement = 0 ;
+    } else {
+      numberOfIterationsWithoutImprovement ++ ;
     }
 
     return currentSolution ;
+  }
+
+  @Override
+  public void initProgress() {
+    attributes.put("NUMBER_OF_ITERATIONS_WITHOUT_IMPROVEMENT", numberOfIterationsWithoutImprovement);
+    super.initProgress();
+  }
+
+  @Override
+  public void updateProgress() {
+    attributes.put("NUMBER_OF_ITERATIONS_WITHOUT_IMPROVEMENT", numberOfIterationsWithoutImprovement);
+    super.updateProgress();
   }
 
   @Override
