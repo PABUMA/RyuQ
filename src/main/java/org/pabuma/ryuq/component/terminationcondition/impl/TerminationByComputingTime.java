@@ -21,7 +21,10 @@ public class TerminationByComputingTime implements TerminationCondition {
 
   @Override
   public boolean isMet(Map<String, Object> algorithmStatusData) {
-    long currentComputingTime = (long) algorithmStatusData.get("COMPUTING_TIME") ;
+    Long currentComputingTime = (Long) algorithmStatusData.get("COMPUTING_TIME") ;
+    if (currentComputingTime ==  algorithmStatusData.get("COMPUTING_TIME")) {
+      throw new RuntimeException("The COMPUTING_TIME field is null") ;
+    }
 
     return currentComputingTime >= maxComputingTime ;
   }
