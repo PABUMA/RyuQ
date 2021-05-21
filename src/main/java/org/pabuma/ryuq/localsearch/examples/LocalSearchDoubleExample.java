@@ -3,8 +3,6 @@ package org.pabuma.ryuq.localsearch.examples;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
 import org.pabuma.ryuq.localsearch.LocalSearch;
-import org.pabuma.ryuq.simulatedannealing.SimulatedAnnealing;
-import org.pabuma.ryuq.simulatedannealing.cooling.impl.Geometric;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.PolynomialMutation;
 import org.uma.jmetal.problem.doubleproblem.DoubleProblem;

@@ -1,7 +1,6 @@
 package org.pabuma.ryuq.simulatedannealing;
 
 import org.pabuma.ryuq.TrajectoryAlgorithm;
-import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
 import org.pabuma.ryuq.simulatedannealing.cooling.CoolingScheme;
 import org.uma.jmetal.operator.mutation.MutationOperator;

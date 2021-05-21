@@ -1,6 +1,5 @@
 package org.pabuma.ryuq;
 
-import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.problem.Problem;

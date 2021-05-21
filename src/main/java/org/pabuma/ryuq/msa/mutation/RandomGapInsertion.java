@@ -4,9 +4,6 @@ import org.pabuma.ryuq.msa.MSASolution;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RandomGapInsertion implements MutationOperator<MSASolution> {
   private final double mutationProbability;
 

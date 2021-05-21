@@ -4,7 +4,6 @@ import org.jmsa.score.impl.*;
 import org.jmsa.substitutionmatrix.SubstitutionMatrix;
 import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
-import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByLimitOfIterationsWithoutImprovement;
 import org.pabuma.ryuq.localsearch.LocalSearch;
 import org.pabuma.ryuq.msa.MSAProblem;

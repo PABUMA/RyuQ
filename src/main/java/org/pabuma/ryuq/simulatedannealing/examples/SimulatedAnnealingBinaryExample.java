@@ -9,7 +9,6 @@ import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
 import org.uma.jmetal.problem.binaryproblem.BinaryProblem;
 import org.uma.jmetal.problem.singleobjective.OneMax;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
-import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 import org.uma.jmetal.util.observer.impl.PrintObjectivesObserver;
 
 public class SimulatedAnnealingBinaryExample {

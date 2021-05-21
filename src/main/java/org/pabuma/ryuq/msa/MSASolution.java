@@ -5,7 +5,6 @@ import org.uma.jmetal.solution.Solution;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.IntStream;
 
 /**
  * Class representing a multiple sequence alignment (MSA). Each sequence is stored as a {@link StringBuilder}
