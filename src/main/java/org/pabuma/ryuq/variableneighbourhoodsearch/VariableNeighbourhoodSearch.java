@@ -3,8 +3,12 @@ package org.pabuma.ryuq.variableneighbourhoodsearch;
 import org.pabuma.ryuq.TrajectoryAlgorithm;
 import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
+import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Class implementing a Variable Neighbourhood Search algorithm by extending the {@link
@@ -15,21 +19,26 @@ import org.uma.jmetal.solution.Solution;
  */
 public class VariableNeighbourhoodSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
   int k_max;
+  MutationOperator<S> mo;
+
   public VariableNeighbourhoodSearch(
       Problem<S> problem,
       CreateInitialSolution<S> createInitialSolution,
       TerminationCondition terminationCondition,
+      MutationOperator<S> mo,
       int k_max) {
     super(problem, createInitialSolution, terminationCondition);
     this.k_max = k_max;
+    this.mo = mo;
   }
 
   @Override
   public S upgrade(S currentSolution) {
     int k = 1;
+    ArrayList<ArrayList<S>> neighbourhoods = generateNeighbourhoods(currentSolution, 25);
     while (k <= k_max) {
       // Step 1: Shaking
-      S mutatedSolution = shake(currentSolution, k);
+      S mutatedSolution = shake(neighbourhoods, k);
       problem.evaluate(mutatedSolution);
 
       // Step 2: Local search
@@ -47,13 +56,43 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
   }
 
   /**
-   * Shake function generates a point y randomly from the k-th neighbourhood of x
-   * @param solution
-   * @param k
-   * @return
+   * Generates an ArrayList of k-neighbourhoods ArrayLists containing each
+   * k-neighbourhood items.
+   *
+   * @param currentSolution: solution from which to generate the neighborhoods.
+   * @param itemsPerNeighbourhood: number of items per neighbourhood.
+   * @return Array list containing ArrayLists with neighbourhood items.
    */
-  public S shake(S solution, int k) {
-    return null;
+  public ArrayList generateNeighbourhoods(S currentSolution, int itemsPerNeighbourhood) {
+    ArrayList<ArrayList<S>> neighbourhoods = new ArrayList<ArrayList<S>>();
+
+    // For each k-neighbourhood
+    for (int k = 1; k <= this.k_max; k++) {
+      ArrayList<S> kNeighbourhood = new ArrayList<S>();
+      // For each item in k-neighbourhood
+      for (int item = 0; item < itemsPerNeighbourhood; item++) {
+        // Apply k mutations of distance 1 for each item
+        for (int i = 1; i <= k; i++) {
+          kNeighbourhood.add(this.mo.execute((S) currentSolution.copy()));
+        }
+      }
+      neighbourhoods.add(kNeighbourhood);
+    }
+    return neighbourhoods;
+  }
+
+
+  /**
+   * Shake function generates a point y randomly from the k-th neighbourhood of x
+   *
+   * @param kNeigbourhoods: pre-generated list of kNeighbourhoods.
+   * @param k: k-neighborhood from which to obtain the random point.
+   * @return random point of the selected k-nearest neighborhood.
+   */
+  public S shake(ArrayList<ArrayList<S>> kNeigbourhoods, int k) {
+    Random rand = new Random();
+    ArrayList<S> kNeigbourhood = kNeigbourhoods.get(k-1);
+    return kNeigbourhood.get(rand.nextInt(kNeigbourhood.size()));
   }
 
   @Override
