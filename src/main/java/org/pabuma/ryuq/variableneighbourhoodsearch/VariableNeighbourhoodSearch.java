@@ -3,6 +3,8 @@ package org.pabuma.ryuq.variableneighbourhoodsearch;
 import org.pabuma.ryuq.TrajectoryAlgorithm;
 import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
+import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
+import org.pabuma.ryuq.localsearch.LocalSearch;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
@@ -42,7 +44,10 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
       problem.evaluate(mutatedSolution);
 
       // Step 2: Local search
-      S mutatedSolution2 = null;
+      LocalSearch<S> ls =
+          new LocalSearch<>(problem, mo, mutatedSolution, new TerminationByEvaluations(20000));
+      ls.run();
+      S mutatedSolution2 = ls.getResult();
 
       // Step 3: Neighbourhood change (move)
       if (mutatedSolution2.objectives()[0] < currentSolution.objectives()[0]) {
@@ -56,8 +61,7 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
   }
 
   /**
-   * Generates an ArrayList of k-neighbourhoods ArrayLists containing each
-   * k-neighbourhood items.
+   * Generates an ArrayList of k-neighbourhoods ArrayLists containing each k-neighbourhood items.
    *
    * @param currentSolution: solution from which to generate the neighborhoods.
    * @param itemsPerNeighbourhood: number of items per neighbourhood.
@@ -81,7 +85,6 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
     return neighbourhoods;
   }
 
-
   /**
    * Shake function generates a point y randomly from the k-th neighbourhood of x
    *
@@ -91,7 +94,7 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
    */
   public S shake(ArrayList<ArrayList<S>> kNeigbourhoods, int k) {
     Random rand = new Random();
-    ArrayList<S> kNeigbourhood = kNeigbourhoods.get(k-1);
+    ArrayList<S> kNeigbourhood = kNeigbourhoods.get(k - 1);
     return kNeigbourhood.get(rand.nextInt(kNeigbourhood.size()));
   }
 
