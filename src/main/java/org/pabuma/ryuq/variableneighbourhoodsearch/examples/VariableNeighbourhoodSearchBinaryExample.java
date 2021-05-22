@@ -18,7 +18,11 @@ public class VariableNeighbourhoodSearchBinaryExample {
 
     VariableNeighbourhoodSearch<BinarySolution> vns =
         new VariableNeighbourhoodSearch<>(
-            problem, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000), 10);
+            problem,
+            new DefaultSolutionCreation<>(problem),
+            new TerminationByEvaluations(20000),
+            mutation,
+            10);
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1000);
     vns.getObservable().register(objectivesObserver);
