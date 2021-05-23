@@ -21,6 +21,7 @@ import java.util.Random;
  */
 public class VariableNeighbourhoodSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
   int k_max;
+  int itemsPerNeighbourhood;
   MutationOperator<S> mo;
 
   public VariableNeighbourhoodSearch(
@@ -28,16 +29,18 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
       S initialSolution,
       TerminationCondition terminationCondition,
       MutationOperator<S> mo,
-      int k_max) {
+      int k_max,
+      int itemsPerNeighbourhood) {
     super(problem, initialSolution, terminationCondition);
     this.k_max = k_max;
+    this.itemsPerNeighbourhood = itemsPerNeighbourhood;
     this.mo = mo;
   }
 
   @Override
   public S upgrade(S currentSolution) {
     int k = 1;
-    ArrayList<ArrayList<S>> neighbourhoods = generateNeighbourhoods(currentSolution, 5);
+    ArrayList<ArrayList<S>> neighbourhoods = generateNeighbourhoods(currentSolution);
     while (k <= k_max && !terminationCondition.isMet(attributes)) {
       // Step 1: Shaking
       S mutatedSolution = shake(neighbourhoods, k);
@@ -64,17 +67,16 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
    * Generates an ArrayList of k-neighbourhoods ArrayLists containing each k-neighbourhood items.
    *
    * @param currentSolution: solution from which to generate the neighborhoods.
-   * @param itemsPerNeighbourhood: number of items per neighbourhood.
    * @return Array list containing ArrayLists with neighbourhood items.
    */
-  public ArrayList generateNeighbourhoods(S currentSolution, int itemsPerNeighbourhood) {
+  public ArrayList generateNeighbourhoods(S currentSolution) {
     ArrayList<ArrayList<S>> neighbourhoods = new ArrayList<ArrayList<S>>();
 
     // For each k-neighbourhood
     for (int k = 1; k <= this.k_max; k++) {
       ArrayList<S> kNeighbourhood = new ArrayList<S>();
       // For each item in k-neighbourhood
-      for (int item = 0; item < itemsPerNeighbourhood; item++) {
+      for (int item = 0; item < this.itemsPerNeighbourhood; item++) {
         // Apply k mutations of distance 1 for each item
         S mutatedSolution = (S) currentSolution.copy();
         for (int i = 1; i <= k; i++) {
