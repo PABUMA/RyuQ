@@ -37,22 +37,22 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
   @Override
   public S upgrade(S currentSolution) {
     int k = 1;
-    ArrayList<ArrayList<S>> neighbourhoods = generateNeighbourhoods(currentSolution, 25);
-    while (k <= k_max) {
+    ArrayList<ArrayList<S>> neighbourhoods = generateNeighbourhoods(currentSolution, 5);
+    while (k <= k_max && !terminationCondition.isMet(attributes)) {
       // Step 1: Shaking
       S mutatedSolution = shake(neighbourhoods, k);
       problem.evaluate(mutatedSolution);
 
       // Step 2: Local search
       LocalSearch<S> ls =
-          new LocalSearch<>(problem, mo, mutatedSolution, new TerminationByEvaluations(20000));
+          new LocalSearch<>(problem, mo, mutatedSolution, new TerminationByEvaluations(100));
       ls.run();
       S mutatedSolution2 = ls.getResult();
 
       // Step 3: Neighbourhood change (move)
       if (mutatedSolution2.objectives()[0] < currentSolution.objectives()[0]) {
         currentSolution = mutatedSolution2;
-        k = 1;
+        break;
       } else {
         k++;
       }
@@ -76,9 +76,11 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
       // For each item in k-neighbourhood
       for (int item = 0; item < itemsPerNeighbourhood; item++) {
         // Apply k mutations of distance 1 for each item
+        S mutatedSolution = (S) currentSolution.copy();
         for (int i = 1; i <= k; i++) {
-          kNeighbourhood.add(this.mo.execute((S) currentSolution.copy()));
+          mutatedSolution = this.mo.execute(mutatedSolution);
         }
+        kNeighbourhood.add(mutatedSolution);
       }
       neighbourhoods.add(kNeighbourhood);
     }
