@@ -25,11 +25,11 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
 
   public VariableNeighbourhoodSearch(
       Problem<S> problem,
-      CreateInitialSolution<S> createInitialSolution,
+      S initialSolution,
       TerminationCondition terminationCondition,
       MutationOperator<S> mo,
       int k_max) {
-    super(problem, createInitialSolution, terminationCondition);
+    super(problem, initialSolution, terminationCondition);
     this.k_max = k_max;
     this.mo = mo;
   }

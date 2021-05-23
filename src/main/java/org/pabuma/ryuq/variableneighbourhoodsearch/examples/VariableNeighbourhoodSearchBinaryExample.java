@@ -16,10 +16,12 @@ public class VariableNeighbourhoodSearchBinaryExample {
     BinaryProblem problem = new OneMax(bits);
     MutationOperator<BinarySolution> mutation = new BitFlipMutation(1.0 / bits);
 
+    BinarySolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
     VariableNeighbourhoodSearch<BinarySolution> vns =
         new VariableNeighbourhoodSearch<>(
             problem,
-            new DefaultSolutionCreation<>(problem),
+            initialSolution,
             new TerminationByEvaluations(20000),
             mutation,
             10);
