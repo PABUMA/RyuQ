@@ -17,8 +17,10 @@ public class SimulatedAnnealingBinaryExample {
     BinaryProblem problem = new OneMax(bits) ;
     MutationOperator<BinarySolution> mutation = new BitFlipMutation(1.0/bits) ;
 
+    BinarySolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
     SimulatedAnnealing<BinarySolution> simulatedAnnealing = new SimulatedAnnealing<>(
-            problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000),
+            problem, mutation, initialSolution, new TerminationByEvaluations(20000),
             1.0, new Geometric(.95)) ;
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1000) ;
