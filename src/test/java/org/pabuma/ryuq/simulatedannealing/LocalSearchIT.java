@@ -3,6 +3,7 @@ package org.pabuma.ryuq.simulatedannealing;
 import org.junit.jupiter.api.Test;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
+import org.pabuma.ryuq.localsearch.LocalSearch;
 import org.pabuma.ryuq.simulatedannealing.cooling.impl.Geometric;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
@@ -16,7 +17,7 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SimulatedAnnealingIT {
+class LocalSearchIT {
   @Test
   public void shouldSimulatedAnnealingWorkProperlyWhenSolvingTheOneMaxProblem() {
     int bits = 1024;
@@ -25,13 +26,12 @@ class SimulatedAnnealingIT {
 
     BinarySolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
 
-    SimulatedAnnealing<BinarySolution> simulatedAnnealing = new SimulatedAnnealing<>(
-            problem, mutation, initialSolution, new TerminationByEvaluations(20000),
-            1.0, new Geometric(.95));
+    LocalSearch<BinarySolution> localSearch = new LocalSearch<>(
+            problem, mutation, initialSolution, new TerminationByEvaluations(20000));
 
-    simulatedAnnealing.run();
+    localSearch.run();
 
-    assertTrue(simulatedAnnealing.getResult().objectives()[0] * -1 > 1010);
+    assertTrue(localSearch.getResult().objectives()[0] * -1 > 1000);
   }
 
   @Test
@@ -41,12 +41,11 @@ class SimulatedAnnealingIT {
 
     DoubleSolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
 
-    SimulatedAnnealing<DoubleSolution> simulatedAnnealing = new SimulatedAnnealing<>(
-            problem, mutation, initialSolution, new TerminationByEvaluations(500000),
-            1.0, new Geometric(.95)) ;
+    LocalSearch<DoubleSolution> localSearch = new LocalSearch<>(
+            problem, mutation, initialSolution, new TerminationByEvaluations(500000)) ;
 
-    simulatedAnnealing.run();
+    localSearch.run();
 
-    assertTrue(simulatedAnnealing.getResult().objectives()[0] < 0.0001);
+    assertTrue(localSearch.getResult().objectives()[0] < 0.0001);
   }
 }

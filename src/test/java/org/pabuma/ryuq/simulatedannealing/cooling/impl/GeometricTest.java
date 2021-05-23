@@ -31,7 +31,8 @@ class GeometricTest {
     double alpha = 0.1 ;
     Geometric coolingScheme = new Geometric(alpha) ;
     double temperatureValue = 0.25 ;
+    int iteration = 0 ;
 
-    assertEquals(temperatureValue * alpha, coolingScheme.updateTemperature(temperatureValue));
+    assertEquals(temperatureValue * alpha, coolingScheme.updateTemperature(temperatureValue, iteration));
   }
 }
