@@ -22,11 +22,11 @@ public class VariableNeighbourhoodSearchBinaryExample {
         new VariableNeighbourhoodSearch<>(
             problem,
             initialSolution,
-            new TerminationByEvaluations(5000),
+            new TerminationByEvaluations(300),
             mutation,
             3, 3);
 
-    PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(100);
+    PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(50);
     vns.getObservable().register(objectivesObserver);
 
     vns.run();
