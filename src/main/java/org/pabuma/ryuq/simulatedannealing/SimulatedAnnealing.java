@@ -1,7 +1,6 @@
 package org.pabuma.ryuq.simulatedannealing;
 
 import org.pabuma.ryuq.TrajectoryAlgorithm;
-import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
 import org.pabuma.ryuq.simulatedannealing.cooling.CoolingScheme;
 import org.uma.jmetal.operator.mutation.MutationOperator;
@@ -13,7 +12,7 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom;
  * Class implementing a simulated annealing algorithm by extending the {@link TrajectoryAlgorithm} interface.
  *
  * @author Antonio J. Nebro
- * @param <S> Generic yype of the problem solutions
+ * @param <S> Generic type of the problem solutions
  */
 public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
   private static final double minimumTemperature = 0.000001;
@@ -24,11 +23,11 @@ public class SimulatedAnnealing<S extends Solution<?>> extends TrajectoryAlgorit
 
   public SimulatedAnnealing(Problem<S> problem,
                             MutationOperator<S> mutation,
-                            CreateInitialSolution<S> createInitialSolution,
+                            S initialSolution,
                             TerminationCondition terminationCriterion,
                             double initialTemperature,
                             CoolingScheme coolingScheme) {
-    super(problem, createInitialSolution, terminationCriterion) ;
+    super(problem, initialSolution, terminationCriterion) ;
     this.mutationOperator = mutation;
     this.temperature = initialTemperature;
     this.coolingScheme = coolingScheme;
