@@ -26,12 +26,13 @@ public class VariableNeighbourhoodSearchMSA {
         VariableNeighbourhoodSearch<MSASolution> vns = new VariableNeighbourhoodSearch<>(
                 problem,
                 initialSolution,
-                new TerminationByEvaluations(1000000),
+                new TerminationByEvaluations(29000),
                 mutation,
                 5,
-                3);
+                3,
+                10);
 
-        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
+        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(500);
         vns.getObservable().register(objectivesObserver);
 
         vns.run();
