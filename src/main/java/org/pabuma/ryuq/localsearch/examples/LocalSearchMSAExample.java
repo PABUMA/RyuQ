@@ -15,40 +15,32 @@ import org.uma.jmetal.util.observer.impl.PrintObjectivesObserver;
 import java.util.List;
 
 public class LocalSearchMSAExample {
-  public static void main(String[] args) throws Exception {
-    SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("resources/PAM250Matrix");
-    MSAProblem problem = new MSAProblem("resources/BB11001.tfa_clu",
-            List.of(new SumOfPairs(substitutionMatrix)));
-    MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
+    public static void main(String[] args) throws Exception {
+        SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("resources/PAM250Matrix");
+        MSAProblem problem = new MSAProblem("resources/BB11001.tfa_clu",
+                List.of(new SumOfPairs(substitutionMatrix)));
+        MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
-<<<<<<< HEAD
-    LocalSearch<MSASolution> localSearch = new LocalSearch<>(
-            problem,
-            mutation,
-            new DefaultSolutionCreation<>(problem),
-            new TerminationByEvaluations(1000000));
-=======
-    MSASolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+        MSASolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
 
-    LocalSearch<MSASolution> localSearch = new LocalSearch<>(
-            problem,
-            mutation,
-            initialSolution,
-            new TerminationByEvaluations(100000));
->>>>>>> simulatedannealing
+        LocalSearch<MSASolution> localSearch = new LocalSearch<>(
+                problem,
+                mutation,
+                initialSolution,
+                new TerminationByEvaluations(100000));
 
-    PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
-    localSearch.getObservable().register(objectivesObserver);
+        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
+        localSearch.getObservable().register(objectivesObserver);
 
-    localSearch.run();
+        localSearch.run();
 
-    System.out.println("Best solution: " + localSearch.getResult().objectives()[0]);
-    System.out.println("Computing tine: " + localSearch.getTotalComputingTime());
+        System.out.println("Best solution: " + localSearch.getResult().objectives()[0]);
+        System.out.println("Computing tine: " + localSearch.getTotalComputingTime());
 
-    problem.writeSequencesToFasta(localSearch.getResult().variables(), "output.FASTA");
+        problem.writeSequencesToFasta(localSearch.getResult().variables(), "output.FASTA");
 
-    localSearch.getResult().variables().forEach(System.out::println);
-    problem.printMSAScores(localSearch.getResult(), List.of(new Entropy(), new Star(substitutionMatrix),
-            new SumOfPairs(substitutionMatrix), new PercentageOfTotallyConservedColumns(), new PercentageOfNonGaps()));
-  }
+        localSearch.getResult().variables().forEach(System.out::println);
+        problem.printMSAScores(localSearch.getResult(), List.of(new Entropy(), new Star(substitutionMatrix),
+                new SumOfPairs(substitutionMatrix), new PercentageOfTotallyConservedColumns(), new PercentageOfNonGaps()));
+    }
 }

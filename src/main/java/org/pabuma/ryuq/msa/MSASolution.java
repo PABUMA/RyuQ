@@ -2,10 +2,6 @@ package org.pabuma.ryuq.msa;
 
 import org.uma.jmetal.solution.AbstractSolution;
 import org.uma.jmetal.solution.Solution;
-<<<<<<< HEAD
-import org.uma.jmetal.util.binarySet.BinarySet;
-=======
->>>>>>> simulatedannealing
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,8 +56,6 @@ public class MSASolution extends AbstractSolution<StringBuilder> {
   public Solution copy() {
     return new MSASolution(this);
   }
-<<<<<<< HEAD
-=======
 
   public void removeGapColumns() {
     for (int i = 0; i < variables().get(0).length(); i++) {
@@ -80,5 +74,4 @@ public class MSASolution extends AbstractSolution<StringBuilder> {
   private void removeColumn(int index) {
     variables().forEach(sequence -> sequence.deleteCharAt(index));
   }
->>>>>>> simulatedannealing
 }
