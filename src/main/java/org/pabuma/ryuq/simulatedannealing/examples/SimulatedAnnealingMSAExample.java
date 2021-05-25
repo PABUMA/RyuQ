@@ -22,10 +22,19 @@ public class SimulatedAnnealingMSAExample {
             List.of(new SumOfPairs(substitutionMatrix)));
     MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
+<<<<<<< HEAD
     SimulatedAnnealing<MSASolution> simulatedAnnealing = new SimulatedAnnealing<>(
             problem,
             mutation,
             new DefaultSolutionCreation<>(problem),
+=======
+    MSASolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
+    SimulatedAnnealing<MSASolution> simulatedAnnealing = new SimulatedAnnealing<>(
+            problem,
+            mutation,
+            initialSolution,
+>>>>>>> simulatedannealing
             new TerminationByEvaluations(1000000),
             1.0,
             new Geometric(.95));

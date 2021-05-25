@@ -34,4 +34,8 @@ public class RandomGapInsertion implements MutationOperator<MSASolution> {
 
     return solution;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> simulatedannealing

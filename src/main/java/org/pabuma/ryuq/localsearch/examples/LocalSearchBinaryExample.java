@@ -3,8 +3,11 @@ package org.pabuma.ryuq.localsearch.examples;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
 import org.pabuma.ryuq.localsearch.LocalSearch;
+<<<<<<< HEAD
 import org.pabuma.ryuq.simulatedannealing.SimulatedAnnealing;
 import org.pabuma.ryuq.simulatedannealing.cooling.impl.Geometric;
+=======
+>>>>>>> simulatedannealing
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
 import org.uma.jmetal.problem.binaryproblem.BinaryProblem;
@@ -18,8 +21,15 @@ public class LocalSearchBinaryExample {
     BinaryProblem problem = new OneMax(bits) ;
     MutationOperator<BinarySolution> mutation = new BitFlipMutation(1.0/bits) ;
 
+<<<<<<< HEAD
     LocalSearch<BinarySolution> localSearch = new LocalSearch<>(
             problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000)) ;
+=======
+    BinarySolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
+    LocalSearch<BinarySolution> localSearch = new LocalSearch<>(
+            problem, mutation, initialSolution, new TerminationByEvaluations(20000)) ;
+>>>>>>> simulatedannealing
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1000) ;
     localSearch.getObservable().register(objectivesObserver);

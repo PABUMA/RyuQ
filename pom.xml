@@ -39,7 +39,11 @@
         <dependency>
             <groupId>com.github.ajnebro</groupId>
             <artifactId>jMSA</artifactId>
+<<<<<<< HEAD
             <version>76f1e66324e4679a792f1e6246a6e235fee468d0</version>
+=======
+            <version>2eaa69c0ce470c98421789805987114b6260d3c2</version>
+>>>>>>> simulatedannealing
         </dependency>
         <dependency>
             <groupId>org.uma.jmetal</groupId>
@@ -56,11 +60,14 @@
             <artifactId>biojava-core</artifactId>
             <version>5.4.0</version>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.7.1</version>
         </dependency>
+=======
+>>>>>>> simulatedannealing
     </dependencies>
 
     <build>

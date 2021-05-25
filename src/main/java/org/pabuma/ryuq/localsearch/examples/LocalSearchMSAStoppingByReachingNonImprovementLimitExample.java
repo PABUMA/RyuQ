@@ -4,7 +4,7 @@ import org.jmsa.score.impl.*;
 import org.jmsa.substitutionmatrix.SubstitutionMatrix;
 import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
-import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
+import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByLimitOfIterationsWithoutImprovement;
 import org.pabuma.ryuq.localsearch.LocalSearch;
 import org.pabuma.ryuq.msa.MSAProblem;
 import org.pabuma.ryuq.msa.MSASolution;
@@ -14,36 +14,29 @@ import org.uma.jmetal.util.observer.impl.PrintObjectivesObserver;
 
 import java.util.List;
 
-public class LocalSearchMSAExample {
+public class LocalSearchMSAStoppingByReachingNonImprovementLimitExample {
   public static void main(String[] args) throws Exception {
     SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("resources/PAM250Matrix");
     MSAProblem problem = new MSAProblem("resources/BB11001.tfa_clu",
             List.of(new SumOfPairs(substitutionMatrix)));
     MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
-<<<<<<< HEAD
-    LocalSearch<MSASolution> localSearch = new LocalSearch<>(
-            problem,
-            mutation,
-            new DefaultSolutionCreation<>(problem),
-            new TerminationByEvaluations(1000000));
-=======
     MSASolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
 
     LocalSearch<MSASolution> localSearch = new LocalSearch<>(
             problem,
             mutation,
             initialSolution,
-            new TerminationByEvaluations(100000));
->>>>>>> simulatedannealing
+            new TerminationByLimitOfIterationsWithoutImprovement(50000));
 
-    PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
+    PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1000);
     localSearch.getObservable().register(objectivesObserver);
 
     localSearch.run();
 
     System.out.println("Best solution: " + localSearch.getResult().objectives()[0]);
     System.out.println("Computing tine: " + localSearch.getTotalComputingTime());
+    System.out.println("Number of computed evaluations: " + localSearch.getEvaluations()) ;
 
     problem.writeSequencesToFasta(localSearch.getResult().variables(), "output.FASTA");
 

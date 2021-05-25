@@ -16,8 +16,10 @@ public class SimulatedAnnealingDoubleExample {
     DoubleProblem problem = new Rastrigin(20) ;
     MutationOperator<DoubleSolution> mutation = new PolynomialMutation(1.0/problem.getNumberOfVariables(), 20.0) ;
 
+    DoubleSolution initialSolution = new DefaultSolutionCreation<>(problem).create() ;
+
     SimulatedAnnealing<DoubleSolution> simulatedAnnealing = new SimulatedAnnealing<>(
-            problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(500000),
+            problem, mutation, initialSolution, new TerminationByEvaluations(500000),
             1.0, new Geometric(.95)) ;
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(10000) ;
