@@ -5,6 +5,8 @@ import org.jmsa.substitutionmatrix.SubstitutionMatrix;
 import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
+import org.pabuma.ryuq.msa.MSAProblem;
+import org.pabuma.ryuq.msa.MSASolution;
 import org.pabuma.ryuq.msa.mutation.RandomGapInsertion;
 import org.pabuma.ryuq.simulatedannealing.SimulatedAnnealing;
 import org.pabuma.ryuq.simulatedannealing.cooling.impl.Geometric;

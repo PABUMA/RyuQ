@@ -37,4 +37,8 @@ public class guidedLocalSearch <S extends Solution<?>> extends TrajectoryAlgorit
     public String getDescription() {
         return "Guided Local Search ";
     }
+
+    public boolean Util(){
+
+    }
 }

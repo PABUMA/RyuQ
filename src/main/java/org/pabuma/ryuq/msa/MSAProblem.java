@@ -2,6 +2,7 @@ package org.pabuma.ryuq.msa;
 
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
+import org.biojava.nbio.core.sequence.io.FastaWriterHelper;
 import org.jmsa.score.Score;
 import org.jmsa.score.impl.Entropy;
 import org.jmsa.score.impl.PercentageOfTotallyConservedColumns;
@@ -121,4 +122,27 @@ public class MSAProblem implements Problem<MSASolution> {
     System.out.println("Sequence length: " + mutatedSolution.variables().size()) ;
 
   }
-}
+
+  public void writeSequencesToFasta(List<StringBuilder> sequences, String fileName) throws Exception {
+    List<ProteinSequence> proteinSequences = new ArrayList<>();
+    for (StringBuilder sequence : sequences) {
+      proteinSequences.add(new ProteinSequence(sequence.toString()));
+    }
+
+    for (int i = 0; i < sequenceNames.size(); i++) {
+      proteinSequences.get(i).setOriginalHeader(sequenceNames.get(i));
+    }
+    FastaWriterHelper.writeProteinSequence(new File(fileName), proteinSequences);
+  }
+
+  public void printMSAScores(MSASolution solution, List<Score> scores) {
+    char[][] decodedSolution = decodeSequences(solution.variables());
+    System.out.println("\nSCORES") ;
+    for (Score score : scores) {
+      System.out.println(score.name() + ": " + score.compute(decodedSolution));
+    }
+  }
+
+
+    }
+
