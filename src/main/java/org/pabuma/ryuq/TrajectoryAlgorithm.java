@@ -7,7 +7,6 @@ import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.util.observable.Observable;
 import org.uma.jmetal.util.observable.impl.DefaultObservable;
-
 import java.util.HashMap;
 import java.util.Map;
 

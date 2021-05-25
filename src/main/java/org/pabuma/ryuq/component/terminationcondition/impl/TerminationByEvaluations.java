@@ -9,6 +9,7 @@ import java.util.Map;
  *
  *  @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
+
 public class TerminationByEvaluations implements TerminationCondition {
   private int maximumNumberOfEvaluations ;
 
