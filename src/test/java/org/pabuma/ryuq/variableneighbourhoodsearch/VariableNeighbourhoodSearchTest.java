@@ -26,7 +26,7 @@ public class VariableNeighbourhoodSearchTest {
 
     VariableNeighbourhoodSearch<BinarySolution> vns =
         new VariableNeighbourhoodSearch<>(
-            problem, initialSolution, new TerminationByEvaluations(300), mutation, 3, 3);
+            problem, initialSolution, new TerminationByEvaluations(300), mutation, 3, 3, 100);
 
     vns.run();
 
@@ -43,7 +43,7 @@ public class VariableNeighbourhoodSearchTest {
 
     VariableNeighbourhoodSearch<DoubleSolution> vns =
         new VariableNeighbourhoodSearch<>(
-            problem, initialSolution, new TerminationByEvaluations(4000), mutation, 3, 3);
+            problem, initialSolution, new TerminationByEvaluations(4000), mutation, 3, 3, 100);
 
     vns.run();
     System.out.println(vns.getResult().objectives()[0]);

@@ -22,6 +22,7 @@ import java.util.Random;
 public class VariableNeighbourhoodSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
   int k_max;
   int itemsPerNeighbourhood;
+  int localSearchEvaluations;
   MutationOperator<S> mo;
 
   public VariableNeighbourhoodSearch(
@@ -30,10 +31,12 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
       TerminationCondition terminationCondition,
       MutationOperator<S> mo,
       int k_max,
-      int itemsPerNeighbourhood) {
+      int itemsPerNeighbourhood,
+      int localSearchEvaluations) {
     super(problem, initialSolution, terminationCondition);
     this.k_max = k_max;
     this.itemsPerNeighbourhood = itemsPerNeighbourhood;
+    this.localSearchEvaluations = localSearchEvaluations;
     this.mo = mo;
   }
 
@@ -48,7 +51,7 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
 
       // Step 2: Local search
       LocalSearch<S> ls =
-          new LocalSearch<>(problem, mo, mutatedSolution, new TerminationByEvaluations(100));
+          new LocalSearch<>(problem, mo, mutatedSolution, new TerminationByEvaluations(this.localSearchEvaluations));
       ls.run();
       S mutatedSolution2 = ls.getResult();
 
