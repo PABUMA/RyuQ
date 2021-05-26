@@ -19,7 +19,7 @@ public class IteratedLocalSearchBinaryExample {
 
         IteratedLocalSearch<BinarySolution> iteratedLocalSearch = new IteratedLocalSearch<>(
                 problem, mutation, new DefaultSolutionCreation<>(problem),
-                new TerminationByEvaluations(20000)) ;
+                new TerminationByEvaluations(100000)) ;
 
         PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1000) ;
         iteratedLocalSearch.getObservable().register(objectivesObserver);
