@@ -35,10 +35,12 @@ public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
         this.tabuList = new ArrayList<S>();
     }
 
-    @Override
     public S upgrade(S currentSolution) {
         S localSolution = mutationOperator.execute((S) currentSolution.copy());
-        problem.evaluate(localSolution);
+        if (tabuList.contains(localSolution)) {
+            problem.evaluate(localSolution);
+            updateProgress(localSolution);
+        }
 
         if (localSolution.objectives()[0] < currentSolution.objectives()[0]) {
             currentSolution = localSolution;
@@ -54,9 +56,17 @@ public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
         super.initProgress();
     }
 
-    @Override
-    public void updateProgress() {
-        super.updateProgress();
+    public void updateProgress(S solution) {
+        evaluations++;
+
+        bestFoundSolution = currentSolution ;
+
+        attributes.put("EVALUATIONS", evaluations);
+        attributes.put("BEST_SOLUTION", bestFoundSolution);
+        attributes.put("COMPUTING_TIME", getCurrentComputingTime());
+
+        observable.setChanged();
+        observable.notifyObservers(attributes);
     }
 
     @Override

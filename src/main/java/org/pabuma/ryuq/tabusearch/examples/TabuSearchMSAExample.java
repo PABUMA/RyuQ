@@ -17,8 +17,8 @@ import java.util.List;
 public class TabuSearchMSAExample {
     public static void main(String[] args) throws Exception {
 
-        SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("RyuQ/resources/PAM250Matrix");
-        MSAProblem problem = new MSAProblem("RyuQ/resources/BB11001.tfa_clu",
+        SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("resources/PAM250Matrix");
+        MSAProblem problem = new MSAProblem("resources/BB11001.tfa_muscle",
                 List.of(new SumOfPairs(substitutionMatrix)));
         MutationOperator<MSASolution> mutation = new RandomGapInsertion(1.0);
 
@@ -27,9 +27,9 @@ public class TabuSearchMSAExample {
                 problem,
                 mutation,
                 new DefaultSolutionCreation<>(problem),
-                new TerminationByEvaluations(1000000));
+                new TerminationByEvaluations(100000));
 
-        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
+        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(2000);
         tabusearch.getObservable().register(objectivesObserver);
 
         tabusearch.run();
