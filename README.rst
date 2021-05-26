@@ -7,6 +7,7 @@
    </p>
    <p align="center">
    	<img alt="commit activity" src="https://img.shields.io/badge/Made%20with-Java-red" />
+	<img alt="GitHub" src="https://img.shields.io/github/license/PABUMA/RyuQ">
      	<img alt="commit activity" src="https://img.shields.io/github/commit-activity/m/PABUMA/RyuQ" />
 	<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/PABUMA/RyuQ">
 	<img alt="GitHub issues" src="https://img.shields.io/github/issues/PABUMA/RyuQ">
