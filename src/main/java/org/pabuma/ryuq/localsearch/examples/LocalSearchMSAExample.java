@@ -27,7 +27,7 @@ public class LocalSearchMSAExample {
             problem,
             mutation,
             initialSolution,
-            new TerminationByEvaluations(100000));
+            new TerminationByEvaluations(1000000));
 
     PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
     localSearch.getObservable().register(objectivesObserver);

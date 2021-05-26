@@ -20,3 +20,4 @@ problems (MSA).
    installation.rst
    trayectorymetaheuristics.rst
    algorithms.rst
+   performance.rst
