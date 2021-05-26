@@ -5,7 +5,6 @@ import org.jmsa.score.impl.*;
 import org.jmsa.substitutionmatrix.SubstitutionMatrix;
 import org.jmsa.substitutionmatrix.impl.GenericSubstitutionMatrix;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
-import org.pabuma.ryuq.component.*;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
 import org.pabuma.ryuq.guidedLocalSearch.guidedLocalSearch;
 import org.pabuma.ryuq.localsearch.LocalSearch;
@@ -33,7 +32,9 @@ public class guidedLocalSearchMSAExample{
                 problem,
                 mutation,
                 initialSolution,
-                new TerminationByEvaluations(100000);
+                new TerminationByEvaluations(100000));
+
+        //glocalSearch.utils(initialSolution);
 
         PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
         guidedLocalSearch.getObservable().register(objectivesObserver);

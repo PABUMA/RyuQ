@@ -1,18 +1,18 @@
 package org.pabuma.ryuq.msa;
 
-import org.biojava.nbio.core.sequence.ProteinSequence;
-import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
-import org.biojava.nbio.core.sequence.io.FastaWriterHelper;
-import org.jmsa.score.Score;
-import org.uma.jmetal.problem.Problem;
+        import org.biojava.nbio.core.sequence.ProteinSequence;
+        import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
+        import org.biojava.nbio.core.sequence.io.FastaWriterHelper;
+        import org.jmsa.score.Score;
+        import org.uma.jmetal.problem.Problem;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
+        import java.io.File;
+        import java.io.IOException;
+        import java.util.ArrayList;
+        import java.util.LinkedHashMap;
+        import java.util.List;
+        import java.util.Map;
+        import java.util.stream.IntStream;
 
 /**
  * Class representing multiple sequence alignment (MSA) optimization problems. The data defining the
