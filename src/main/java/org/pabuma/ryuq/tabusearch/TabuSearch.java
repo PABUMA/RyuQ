@@ -1,43 +1,71 @@
 package org.pabuma.ryuq.tabusearch;
 
-import java.util.List;
+import org.pabuma.ryuq.TrajectoryAlgorithm;
+import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
+import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
+import org.uma.jmetal.operator.mutation.MutationOperator;
+import org.uma.jmetal.problem.Problem;
+import org.uma.jmetal.solution.Solution;
 
-import org.apache.commons.collections4.IteratorUtils;
+import java.util.*;
 
-public class TabuSearch {
+/**
+ * Class implementing a local search algorithm by extending the {@link TrajectoryAlgorithm} interface.
+ *
+ * @author Antonio J. Nebro
+ * @param <S> Generic type of the problem solutions
+ */
+public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
+    private MutationOperator<S> mutationOperator;
+    private List<S> tabuList;
 
-    private TabuList tabuList;
-    private StopCondition stopCondition;
-    private BestNeighborSolutionLocator solutionLocator;
-
-    public TabuSearch(TabuList tabuList, StopCondition stopCondition, BestNeighborSolutionLocator solutionLocator) {
-        this.tabuList = tabuList;
-        this.stopCondition = stopCondition;
-        this.solutionLocator = solutionLocator;
+    public TabuSearch(Problem<S> problem,
+                      MutationOperator<S> mutation,
+                      CreateInitialSolution<S> createInitialSolution,
+                      TerminationCondition terminationCriterion) {
+        super(problem, createInitialSolution, terminationCriterion) ;
+        this.mutationOperator = mutation;
+        this.tabuList = new ArrayList<S>();
     }
 
-    public Solutions run(Solutions initialSolution) {
-        Solutions bestSolution = initialSolution;
-        Solutions currentSolution = initialSolution;
+    public TabuSearch(Problem<S> problem,
+                      MutationOperator<S> mutation,
+                      TerminationCondition terminationCriterion) {
+        this(problem, mutation, null, terminationCriterion) ;
+        this.tabuList = new ArrayList<S>();
+    }
 
-        Integer currentIteration = 0;
-        while (!stopCondition.mustStop(++currentIteration, bestSolution)) {
+    @Override
+    public S upgrade(S currentSolution) {
+        S localSolution = mutationOperator.execute((S) currentSolution.copy());
+        problem.evaluate(localSolution);
 
-            List<Solutions> candidateNeighbors = currentSolution.getNeighbors();
-            List<Solutions> solutionsInTabu =IteratorUtils.toList(tabuList.iterator());
-
-            Solutions bestNeighborFound = solutionLocator.findBestNeighbor(candidateNeighbors, solutionsInTabu);
-            if (bestNeighborFound.getValue() < bestSolution.getValue()) {
-                bestSolution = bestNeighborFound;
-            }
-
-            tabuList.add(currentSolution);
-            currentSolution = bestNeighborFound;
-
-            tabuList.updateSize(currentIteration, bestSolution);
+        if (localSolution.objectives()[0] < currentSolution.objectives()[0]) {
+            currentSolution = localSolution;
+        } else {
+            tabuList.add(localSolution);
         }
 
-        return bestSolution;
+        return currentSolution ;
     }
 
+    @Override
+    public void initProgress() {
+        super.initProgress();
+    }
+
+    @Override
+    public void updateProgress() {
+        super.updateProgress();
+    }
+
+    @Override
+    public String getName() {
+        return "TS";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Tabu Search";
+    }
 }
