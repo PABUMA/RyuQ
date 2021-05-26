@@ -1,6 +1,5 @@
 package org.pabuma.ryuq;
 
-import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.problem.Problem;
@@ -12,7 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Abstract class representing the behaviour of a generic trajectory-based metaheuristic
+ * Abstract class representing generic trajectory-based metaheuristics. The behaviour of the algorithms is defined
+ * in the {@link #run} method, which stars with an initial solution that will be improved iteratively. The initial
+ * solution can be set in a constructor or by calling the {@link #setInitialSolution(Solution)} method.
+ *
  * @author Antonio J. Nebro
  *
  * @param <S> Generic yype of the problem solutions
@@ -22,7 +24,7 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
   // Algorithm components
   protected TerminationCondition terminationCondition;
-  protected CreateInitialSolution<S> initialSolutionGeneration;
+  protected S initialSolution;
 
   // State variables
   protected long initTime;
@@ -36,22 +38,30 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
   protected Map<String, Object> attributes;
 
   public TrajectoryAlgorithm(Problem<S> problem,
-                             CreateInitialSolution<S> createInitialSolution,
+                             S initialSolution,
                              TerminationCondition terminationCondition) {
     this.problem = problem ;
-    this.initialSolutionGeneration = createInitialSolution;
+    this.initialSolution = initialSolution;
     this.terminationCondition = terminationCondition;
 
     this.observable = new DefaultObservable<>("Trajectory-based Algorithm");
     this.attributes = new HashMap<>();
   }
 
+  public TrajectoryAlgorithm(Problem<S> problem,
+                             TerminationCondition terminationCondition) {
+    this(problem, null, terminationCondition) ;
+  }
+
   public abstract S upgrade(S currentSolution) ;
 
   @Override
   public void run() {
+    if (null == initialSolution) {
+      throw new RuntimeException("The initial solution is null") ;
+    }
     initTime = System.currentTimeMillis();
-    currentSolution = initialSolutionGeneration.create();
+    currentSolution = initialSolution ;
     problem.evaluate(currentSolution) ;
     initProgress();
     while (!terminationCondition.isMet(attributes)) {
@@ -100,6 +110,11 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
     }
   }
 
+  public void setInitialSolution(S initialSolution) {
+    this.initialSolution = initialSolution ;
+    this.bestFoundSolution = initialSolution ;
+  }
+
   public long getCurrentComputingTime() {
     return System.currentTimeMillis() - initTime;
   }
@@ -110,6 +125,10 @@ public abstract class TrajectoryAlgorithm<S extends Solution<?>> implements Algo
 
   public Observable<Map<String, Object>> getObservable() {
     return observable ;
+  }
+
+  public int getEvaluations() {
+    return evaluations ;
   }
 
   @Override

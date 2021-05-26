@@ -1,6 +1,5 @@
 package org.pabuma.ryuq.iteratedlocalsearch;
 
-import org.pabuma.ryuq.TrajectoryAlgorithm;
 import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
 import org.uma.jmetal.operator.mutation.MutationOperator;
