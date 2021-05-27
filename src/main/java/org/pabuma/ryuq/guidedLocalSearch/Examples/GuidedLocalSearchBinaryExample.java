@@ -31,7 +31,7 @@ public class GuidedLocalSearchBinaryExample {
 
 
         }
-        //guidedLocalSearch<BinarySolution> guidedLocalSearch = new guidedLocalSearch<BinarySolution>(problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
+        //GuidedLocalSearch<BinarySolution> guidedLocalSearch = new GuidedLocalSearch<BinarySolution>(problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
 
         //guidedLocalSearch.run();
 

@@ -32,12 +32,30 @@ public class GuidedLocalSearchMSAExample {
                 initialSolution,
                 new TerminationByEvaluations(100000));
 
-        glocalSearch.utils(initialSolution);
-
         PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
         glocalSearch.getObservable().register(objectivesObserver);
 
         glocalSearch.run();
+
+        MSASolution bestFoundSolution = glocalSearch.getResult() ;
+
+        int numberOfRestarts = 10 ;
+        int restartCounters = 0 ;
+        while (restartCounters < numberOfRestarts) {
+            System.out.println("Restart: " + restartCounters) ;
+            System.out.println("Current found fitness: " + glocalSearch.getResult().objectives()[0]) ;
+            System.out.println("Best found fitness: " + bestFoundSolution.objectives()[0]) ;
+
+            MSASolution newInitialSolution = problem.createSolution();
+            problem.evaluate(newInitialSolution) ;
+            glocalSearch.setInitialSolution(newInitialSolution);
+            glocalSearch.run();
+
+            if (glocalSearch.getResult().objectives()[0] < bestFoundSolution.objectives()[0]) {
+                bestFoundSolution = glocalSearch.getResult() ;
+            }
+            restartCounters ++ ;
+        }
 
         System.out.println("Best solution: " + glocalSearch.getResult().objectives()[0]);
         System.out.println("Computing tine: " + glocalSearch.getTotalComputingTime());

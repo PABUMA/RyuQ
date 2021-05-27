@@ -1,5 +1,6 @@
 package org.pabuma.ryuq.guidedLocalSearch;
 
+import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
 import org.pabuma.ryuq.msa.MSASolution;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.solution.Solution;
@@ -15,57 +16,55 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 public class GuidedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
 
     private MutationOperator<S> mutationOperator;
-    private int numberOfIterationsWithoutImprovement ;
+    private int numberOfIterationsWithoutImprovement;
+    private int lambda;
 
-  public GuidedLocalSearch(Problem<S> problem,
-                           MutationOperator<S> mutation,
-                           S initialSolution,
-                           TerminationCondition terminationCriterion) {
+    public GuidedLocalSearch(Problem<S> problem,
+                             MutationOperator<S> mutation,
+                             S initialSolution,
+                             TerminationCondition terminationCriterion) {
 
-            super(problem, initialSolution, terminationCriterion) ;
-            this.mutationOperator = mutation;
-        }
+        super(problem, initialSolution, terminationCriterion);
+        this.mutationOperator = mutation;
+    }
 
 
-    public void utils(MSASolution initialSolution){
+    public void utils(MSASolution initialSolution) {
         int i;
         boolean I;
-        Integer cont=0;
+        Integer cont = 0;
         for (i = 0; i < initialSolution.variables().size(); i++) {
-            if(     initialSolution.variables().get(0).charAt(i)==initialSolution.variables().get(1).charAt(i)||
-                    initialSolution.variables().get(0).charAt(i)==initialSolution.variables().get(2).charAt(i)||
-                    initialSolution.variables().get(0).charAt(i)==initialSolution.variables().get(3).charAt(i)
+            if (initialSolution.variables().get(0).charAt(i) == initialSolution.variables().get(1).charAt(i) ||
+                    initialSolution.variables().get(0).charAt(i) == initialSolution.variables().get(2).charAt(i) ||
+                    initialSolution.variables().get(0).charAt(i) == initialSolution.variables().get(3).charAt(i)
             ) {
                 cont++;
             }
         }
 
-        if(cont>4){
-            I=true;
-        }
-        else{
-            I=false;
-        }
-
-    }
-
-
-
-    @Override
-    public S upgrade(S currentSolution) {
-        S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
-        problem.evaluate(mutatedSolution);
-
-        if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
-            currentSolution = mutatedSolution;
-            numberOfIterationsWithoutImprovement = 0 ;
+        if (cont > 4) {
+            I = true;
         } else {
-            numberOfIterationsWithoutImprovement ++ ;
+            I = false;
         }
 
-        return currentSolution ;
-
     }
+
+    @Override //local search
+    public S upgrade(S currentSolution) {
+            S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
+            problem.evaluate(mutatedSolution);
+
+            if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
+                currentSolution = mutatedSolution;
+                numberOfIterationsWithoutImprovement = 0;
+            } else {
+                numberOfIterationsWithoutImprovement++;
+            }
+
+            return currentSolution;
+      }  
+
     @Override
     public String getName() {
         return "GLS";
