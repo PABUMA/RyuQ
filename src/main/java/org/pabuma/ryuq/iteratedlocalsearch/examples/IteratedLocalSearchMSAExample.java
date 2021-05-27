@@ -34,6 +34,8 @@ public class IteratedLocalSearchMSAExample {
 
         iteratedLocalSearch.run();
 
+        System.out.println("Total Perturbations: " + iteratedLocalSearch.getTotalPert());
+        System.out.println("Total Local Searches: " + iteratedLocalSearch.getTotalLS());
         System.out.println("Best solution: " + iteratedLocalSearch.getResult().objectives()[0]);
         System.out.println("Computing tine: " + iteratedLocalSearch.getTotalComputingTime());
 
