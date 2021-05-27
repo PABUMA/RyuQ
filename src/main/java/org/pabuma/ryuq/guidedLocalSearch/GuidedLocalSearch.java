@@ -12,14 +12,15 @@ import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 
-public class guidedLocalSearch <S extends Solution<?>> extends TrajectoryAlgorithm<S> {
+public class GuidedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
 
     private MutationOperator<S> mutationOperator;
+    private int numberOfIterationsWithoutImprovement ;
 
-  public guidedLocalSearch(Problem<S> problem,
-                MutationOperator<S> mutation,
+  public GuidedLocalSearch(Problem<S> problem,
+                           MutationOperator<S> mutation,
                            S initialSolution,
-                TerminationCondition terminationCriterion) {
+                           TerminationCondition terminationCriterion) {
 
             super(problem, initialSolution, terminationCriterion) ;
             this.mutationOperator = mutation;
@@ -52,7 +53,18 @@ public class guidedLocalSearch <S extends Solution<?>> extends TrajectoryAlgorit
 
     @Override
     public S upgrade(S currentSolution) {
-        return null;
+        S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
+        problem.evaluate(mutatedSolution);
+
+        if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
+            currentSolution = mutatedSolution;
+            numberOfIterationsWithoutImprovement = 0 ;
+        } else {
+            numberOfIterationsWithoutImprovement ++ ;
+        }
+
+        return currentSolution ;
+
     }
     @Override
     public String getName() {

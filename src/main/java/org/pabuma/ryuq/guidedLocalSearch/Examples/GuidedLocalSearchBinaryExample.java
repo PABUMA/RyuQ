@@ -1,8 +1,5 @@
 package org.pabuma.ryuq.guidedLocalSearch.Examples;
 
-import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
-import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
-import org.pabuma.ryuq.guidedLocalSearch.guidedLocalSearch;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
 import org.uma.jmetal.problem.binaryproblem.BinaryProblem;
@@ -11,7 +8,7 @@ import org.uma.jmetal.solution.binarysolution.BinarySolution;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class guidedLocalSearchBinaryExample {
+public class GuidedLocalSearchBinaryExample {
     public static void main(String[] args) {
         int bits = 1024;
         BinaryProblem problem = new OneMax(bits);
@@ -34,11 +31,11 @@ public class guidedLocalSearchBinaryExample {
 
 
         }
-        guidedLocalSearch<BinarySolution> guidedLocalSearch = new guidedLocalSearch<BinarySolution>(problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
+        //guidedLocalSearch<BinarySolution> guidedLocalSearch = new guidedLocalSearch<BinarySolution>(problem, mutation, new DefaultSolutionCreation<>(problem), new TerminationByEvaluations(20000));
 
-        guidedLocalSearch.run();
+        //guidedLocalSearch.run();
 
-        assertTrue(guidedLocalSearch.getResult().objectives()[0] * -1 > 1000);
+        //assertTrue(guidedLocalSearch.getResult().objectives()[0] * -1 > 1000);
     }
 
 }
