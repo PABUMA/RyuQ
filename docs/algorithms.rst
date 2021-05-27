@@ -10,6 +10,8 @@ Tabu Search
 Iterated Local Search
 ---------------------
 
+.. include:: ils.rst
+
 Variable Neighborhood Search
 ----------------------------
 
