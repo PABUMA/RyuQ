@@ -30,13 +30,13 @@ public class GuidedLocalSearchMSAExample {
                 problem,
                 mutation,
                 initialSolution,
-                new TerminationByEvaluations(100000));
+                new TerminationByEvaluations(100000),100000);
 
         PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
         glocalSearch.getObservable().register(objectivesObserver);
 
         glocalSearch.run();
-
+        //
         MSASolution bestFoundSolution = glocalSearch.getResult() ;
 
         int numberOfRestarts = 10 ;
@@ -57,7 +57,9 @@ public class GuidedLocalSearchMSAExample {
             restartCounters ++ ;
         }
 
-        System.out.println("Best solution: " + glocalSearch.getResult().objectives()[0]);
+
+        System.out.println("Best solution: " + bestFoundSolution.objectives()[0]);
+        System.out.println("Best solution???: " +glocalSearch.getResult().objectives()[0]);
         System.out.println("Computing tine: " + glocalSearch.getTotalComputingTime());
 
         problem.writeSequencesToFasta(glocalSearch.getResult().variables(), "output.FASTA");
