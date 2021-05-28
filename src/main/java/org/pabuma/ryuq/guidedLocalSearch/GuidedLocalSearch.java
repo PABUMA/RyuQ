@@ -18,40 +18,25 @@ public class GuidedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorith
     private MutationOperator<S> mutationOperator;
     private int numberOfIterationsWithoutImprovement;
     private int lambda;
+    int iteraciones;
 
     public GuidedLocalSearch(Problem<S> problem,
                              MutationOperator<S> mutation,
                              S initialSolution,
-                             TerminationCondition terminationCriterion) {
+                             TerminationCondition terminationCriterion,int iteraciones) {
 
         super(problem, initialSolution, terminationCriterion);
         this.mutationOperator = mutation;
+        this.iteraciones=iteraciones;
     }
 
 
-    public void utils(MSASolution initialSolution) {
-        int i;
-        boolean I;
-        Integer cont = 0;
-        for (i = 0; i < initialSolution.variables().size(); i++) {
-            if (initialSolution.variables().get(0).charAt(i) == initialSolution.variables().get(1).charAt(i) ||
-                    initialSolution.variables().get(0).charAt(i) == initialSolution.variables().get(2).charAt(i) ||
-                    initialSolution.variables().get(0).charAt(i) == initialSolution.variables().get(3).charAt(i)
-            ) {
-                cont++;
-            }
-        }
-
-        if (cont > 4) {
-            I = true;
-        } else {
-            I = false;
-        }
-
-    }
-
-    @Override //local search
+    @Override //local search with restart
     public S upgrade(S currentSolution) {
+        currentSolution= problem.createSolution();
+        for ( int i = 0;
+        i<iteraciones;
+        i++){
             S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
             problem.evaluate(mutatedSolution);
 
@@ -62,16 +47,32 @@ public class GuidedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorith
                 numberOfIterationsWithoutImprovement++;
             }
 
-            return currentSolution;
-      }  
+        }
+
+        return currentSolution;
+    }
 
     @Override
     public String getName() {
         return "GLS";
     }
+
     @Override
     public String getDescription() {
         return "Guided Local Search ";
+    }
+
+    @Override
+    protected void updateProgress() {
+        evaluations+=100000;
+        bestFoundSolution = updateBestFoundSolution(bestFoundSolution, currentSolution) ;
+
+        attributes.put("EVALUATIONS", evaluations);
+        attributes.put("BEST_SOLUTION", bestFoundSolution);
+        attributes.put("COMPUTING_TIME", getCurrentComputingTime());
+
+        observable.setChanged();
+        observable.notifyObservers(attributes);
     }
 
 
