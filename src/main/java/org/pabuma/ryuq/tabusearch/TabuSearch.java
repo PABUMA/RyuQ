@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
     private MutationOperator<S> mutationOperator;
-    private List<S> tabuList;
+    private TabuList<S> tabuList;
 
     public TabuSearch(Problem<S> problem,
                       MutationOperator<S> mutation,
@@ -25,19 +25,19 @@ public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
                       TerminationCondition terminationCriterion) {
         super(problem, createInitialSolution, terminationCriterion) ;
         this.mutationOperator = mutation;
-        this.tabuList = new ArrayList<S>();
+        this.tabuList = new TabuList<>();
     }
 
     public TabuSearch(Problem<S> problem,
                       MutationOperator<S> mutation,
                       TerminationCondition terminationCriterion) {
         this(problem, mutation, null, terminationCriterion) ;
-        this.tabuList = new ArrayList<S>();
+        this.tabuList = new TabuList<>();
     }
 
     public S upgrade(S currentSolution) {
         S localSolution = mutationOperator.execute((S) currentSolution.copy());
-        if (tabuList.contains(localSolution)) {
+        if (tabuList.inIn(localSolution)) {
             problem.evaluate(localSolution);
             updateProgress(localSolution);
         }
@@ -45,7 +45,7 @@ public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
         if (localSolution.objectives()[0] < currentSolution.objectives()[0]) {
             currentSolution = localSolution;
         } else {
-            tabuList.add(localSolution);
+            tabuList.addList(localSolution);
         }
 
         return currentSolution ;
