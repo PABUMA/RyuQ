@@ -30,6 +30,28 @@ public class GuidedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorith
         this.iteraciones=iteraciones;
     }
 
+    public MSASolution restart(GuidedLocalSearch glocalSearch){
+        MSASolution bestFoundSolution = (MSASolution) glocalSearch.getResult();
+
+        int numberOfRestarts = 10 ;
+        int restartCounters = 0 ;
+        while (restartCounters < numberOfRestarts) {
+            System.out.println("Restart: " + restartCounters) ;
+            System.out.println("Current found fitness: " + glocalSearch.getResult().objectives()[0]) ;
+            System.out.println("Best found fitness: " + bestFoundSolution.objectives()[0]) ;
+
+            MSASolution newInitialSolution = (MSASolution) problem.createSolution();
+            problem.evaluate((S) newInitialSolution);
+            glocalSearch.setInitialSolution(newInitialSolution);
+            glocalSearch.run();
+
+            if (glocalSearch.getResult().objectives()[0] < bestFoundSolution.objectives()[0]) {
+                bestFoundSolution = (MSASolution) glocalSearch.getResult();
+            }
+            restartCounters ++ ;
+        }
+        return bestFoundSolution;
+    }
 
     @Override //local search with restart
     public S upgrade(S currentSolution) {
