@@ -1,0 +1,1 @@
+package org.pabuma.ryuq.component.terminationcondition;
