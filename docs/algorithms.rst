@@ -27,6 +27,8 @@ current solution is thus restricted to the solutions that do not belong to the t
 termination condition is met. It might also terminate if the allowed set is empty, that is, if all the solutions in
 N(s) are forbidden by the tabu list.
 
+.. figure:: /docs/figures/imagets.png
+
 Iterated Local Search
 ---------------------
 
