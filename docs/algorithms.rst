@@ -17,7 +17,7 @@ The pseudo-code of a basic tabu search is the following:
             s = Generate an initial solution
             TabuList = null
             while (!stoppingCondition):
-                s = ChooseBestOf(N(s)\TabuList)
+                s = ChooseBestOf(N(s)/TabuList)
                 Update TabuList
 
 The simple TS algorithm applies a best improvement local search as basic ingredient and
