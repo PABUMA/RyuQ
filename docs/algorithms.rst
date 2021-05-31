@@ -7,6 +7,16 @@ Local Search
 Tabu Search
 -----------
 
+
+
+.. code-block:: python
+    def tabu_search():
+        s = Generate an initial solution
+        TabuList = null
+        while (!stoppingCondition):
+            s = ChooseBestOf(N(s)\TabuList)
+            Update TabuList
+
 Iterated Local Search
 ---------------------
 
