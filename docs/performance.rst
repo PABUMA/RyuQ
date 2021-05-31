@@ -33,7 +33,8 @@ the comparison is fair, all the algorithms are configured to stop when  1 millio
 
 .. code-block:: python
 
-	import scipy.stats as stats
+    # Python script to analyze the results
+    import scipy.stats as stats
     import matplotlib.pyplot as plt
 
     local_search_fitness = [31,34,27,34,45,28,26,40,34,31]
