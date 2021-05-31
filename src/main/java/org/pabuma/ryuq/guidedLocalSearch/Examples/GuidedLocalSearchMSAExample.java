@@ -40,7 +40,6 @@ public class GuidedLocalSearchMSAExample {
         MSASolution bestFoundSolution = glocalSearch.restart(glocalSearch);
         System.out.println("-----------------------------------------");
         System.out.println("Best solution: " + bestFoundSolution.objectives()[0]);
-        //System.out.println("Best solution???: " +glocalSearch.getResult().objectives()[0]);
         System.out.println("Computing tine: " + glocalSearch.getTotalComputingTime());
 
         problem.writeSequencesToFasta(glocalSearch.getResult().variables(), "output.FASTA");
