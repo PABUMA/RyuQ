@@ -6,6 +6,18 @@ Local Search
 
 Tabu Search
 -----------
+<<<<<<< HEAD
+Tabu Search is among the most cited and used metaheuristics for CO problems. It can be considered as a dynamic
+neighborhood search technique.
+
+The simple TS algorithm applies a best improvement local search as basic ingredient and uses a short term memory to
+escape from local minima and to avoid cycles. The short term memory is implemented as a tabu list that keeps track of
+the most recently visited solutions and forbids moves toward them. The neighborhood of the current solution is thus
+restricted to the solutions that do not belong to the tabu list. The algorithm stops when a termination condition is
+met. It might also terminate if the allowed set is empty, that is, if all the solutions in N (s) are forbidden by the
+tabu list.
+=======
+>>>>>>> parent of fb8067a (Update algorithms.rst)
 
 Iterated Local Search
 ---------------------
