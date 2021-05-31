@@ -41,6 +41,46 @@ Variable Neighborhood Search
 
 Guided Local Search
 -------------------
+The local guided search is a metaheuristic search method. The method is an alternative to the local search, but more effective. GLS has the idea of increasing the objective function with penalties, these are used to escape the local plateaus and minimum and finally establish a local optimum.
+
+The GLS pseudocode is shown below:
+
+.. code-block:: python
+
+    def guided_local_search():
+        s= GenerateInitialSolution()
+        while(!TerminatedCondition):
+            s= LocalSearch(s,f')
+              for(max(Util(s,i))):
+                           Pi++;
+            Update(f',P)
+
+
+The algorithm starts from an initial solution and applies a local search method until obtain a local minimum. Then, the matrix of penalties is updated while increasing some penalties and in turn, the local search is started again.
+The Util function tries to penalize an attribute i given a local optimum s*, and finally the most useful attribute is the penalized one. The Util parameters are ci which is the cost of the attribute, pi is the current criminalization of the attribute i, and finally, I(s) is an indicator that indicates if the characteristic i is present in the solution s:
+
+.. figure:: /docs/figures/UtilFunction.png
+    :width: 500
+    :align: center
+
+The local guided search is complicated to implement, so an adaptation of this method was made. We have made a loop of n iterations in which we do a local search.
+Start with an initial solution and look to your neighborhood for a better solution. If you find it, replace your current solution with the new one and continue with the process, until you can’t improve the current solution, and so on.
+We do this because we use the Local Search algorithm with Restart which is something different from the original Local Search algorithm.
+With the original algorithm, in each iteration of the loop, we start from a different initial solution; having as many initial solutions as iterations are done in the loop.
+With Restart what we do is to start from the same initial solution in all iterations, thus achieving a more reliable comparison of results since we start from the same initial solution.
+
+.. code-block:: python
+
+    def guided_local_search():
+        currentSolution= GenerateInitialSolution()
+        while(iterations):
+            s=mutatedSolution
+             if(mutatedSolution<s):
+            currentSolution=s;
+            iterations=0;
+         else:
+            iterations++
+        Update(CurrentSolution)
 
 Simulated Annealing
 -------------------
