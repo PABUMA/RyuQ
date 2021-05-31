@@ -25,7 +25,8 @@ uses a short term memory to escape from local minima and to avoid cycles. The sh
 list that keeps track of the most recently visited solutions and forbids moves toward them. The neighborhood of the
 current solution is thus restricted to the solutions that do not belong to the tabu list. The algorithm stops when a
 termination condition is met. It might also terminate if the allowed set is empty, that is, if all the solutions in
-N(s)are forbidden by the tabu list.
+N(s) are forbidden by the tabu list.
+
 Iterated Local Search
 ---------------------
 
