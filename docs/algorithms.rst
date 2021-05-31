@@ -28,6 +28,7 @@ termination condition is met. It might also terminate if the allowed set is empt
 N(s) are forbidden by the tabu list.
 
 .. figure:: /docs/figures/imagets.png
+    :width: 500
     :align: center
 
 Iterated Local Search
