@@ -27,9 +27,9 @@ public class IteratedLocalSearchMSAExample {
                 problem,
                 mutation,
                 new DefaultSolutionCreation<>(problem),
-                new TerminationByEvaluations(100000));
+                new TerminationByEvaluations(1000000));
 
-        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(2000);
+        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(1);
         iteratedLocalSearch.getObservable().register(objectivesObserver);
 
         iteratedLocalSearch.run();

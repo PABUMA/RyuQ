@@ -2,6 +2,7 @@ package org.pabuma.ryuq.iteratedlocalsearch;
 
 import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
+import org.pabuma.ryuq.localsearch.LocalSearch;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
@@ -12,8 +13,8 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
 
     private S localSearchSolution;
     private MutationOperator<S> mutationOperator;
-    private int cPert;
-    private int cLS;
+    private int countPerturbations;
+    private int countLocalSearches;
 
     public IteratedLocalSearch(Problem<S> problem,
                                MutationOperator<S> mutation,
@@ -21,18 +22,21 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
                                TerminationCondition terminationCriterion){
         super(problem, createInitialSolution, terminationCriterion);
         this.mutationOperator = mutation;
-        cPert = 0;
-        cLS = 0;
-        this.localSearchSolution = LocalSearch(createInitialSolution.create(), 1000);
+        countPerturbations = 0;
+        countLocalSearches = 0;
+        this.localSearchSolution = LocalSearch(createInitialSolution.create(), 100000);
     }
 
     @Override
     public S upgrade(S currentSolution) {
-        S locMinSolution = perturbation(currentSolution, 4);
-        problem.evaluate(locMinSolution);
-        S localSearchSolution2 = LocalSearch(locMinSolution, 1000);
+        S localSearchSolution2 = LocalSearch(currentSolution, 100000);
         if (localSearchSolution2.objectives()[0] < currentSolution.objectives()[0]){
             currentSolution = localSearchSolution2;
+        }
+        S locMinSolution = perturbation(currentSolution, 4);
+        problem.evaluate(locMinSolution);
+        if (locMinSolution.objectives()[0] < currentSolution.objectives()[0]){
+            currentSolution = locMinSolution;
         }
         return currentSolution;
     }
@@ -44,7 +48,7 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
             if (mutatedSolution.objectives()[0] < currentSolution.objectives()[0]) {
                 currentSolution = mutatedSolution;
             }
-            cLS++;
+            countLocalSearches++;
         }
         return currentSolution;
     }
@@ -53,15 +57,14 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
         for (int i = 0; i < n; i ++){
             S mutatedSolution = mutationOperator.execute((S) currentSolution.copy());
             currentSolution = mutatedSolution;
-            cPert++;
+            countPerturbations++;
         }
-        problem.evaluate(currentSolution);
         return currentSolution;
     }
 
     @Override
     protected void updateProgress() {
-        evaluations += 1000;
+        evaluations += 100000;
         bestFoundSolution = updateBestFoundSolution(bestFoundSolution, currentSolution) ;
 
         attributes.put("EVALUATIONS", evaluations);
@@ -73,11 +76,11 @@ public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgori
     }
 
     public int getTotalPert(){
-        return cPert;
+        return countPerturbations;
     }
 
     public int getTotalLS(){
-        return cLS;
+        return countLocalSearches;
     }
 
     @Override
