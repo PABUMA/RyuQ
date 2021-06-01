@@ -31,3 +31,19 @@ the comparison is fair, all the algorithms are configured to stop when  1 millio
 +-----+------+------+
 
 
+.. code-block:: python
+
+    # Python script to analyze the results
+    import scipy.stats as stats
+    import matplotlib.pyplot as plt
+
+    local_search_fitness = [31,34,27,34,45,28,26,40,34,31]
+    simulated_annealing_fitness = [34,29,27,30,31,43,25,26,27,47]
+
+    plt.boxplot([local_search_fitness, simulated_annealing_fitness], labels=["LS", "SA"])
+    plt.show()
+
+    # https://www.statology.org/mann-whitney-u-test-python/
+    print(stats.mannwhitneyu(local_search_fitness, simulated_annealing_fitness))
+
+.. image:: figures/boxplots.png

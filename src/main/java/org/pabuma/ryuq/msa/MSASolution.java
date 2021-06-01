@@ -2,6 +2,7 @@ package org.pabuma.ryuq.msa;
 
 import org.uma.jmetal.solution.AbstractSolution;
 import org.uma.jmetal.solution.Solution;
+import org.uma.jmetal.util.errorchecking.JMetalException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -73,5 +74,16 @@ public class MSASolution extends AbstractSolution<StringBuilder> {
 
   private void removeColumn(int index) {
     variables().forEach(sequence -> sequence.deleteCharAt(index));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null) {
+      throw new JMetalException("The solution to compare is null");
+    }
+
+    MSASolution solution = (MSASolution) o;
+
+    return this.variables().equals(solution.variables());
   }
 }

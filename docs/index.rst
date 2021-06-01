@@ -6,7 +6,7 @@
 RyuQ project: Trajectory-based metaheuristics for multiple sequence alignment
 =============================================================================
 
-Tray is a collaborative project of the students of the "Programación Avanzada in Bionformatics" subject
+RyuQ is a collaborative project of the students of the "Programación Avanzada in Bionformatics" subject
 (Health Engineering degree, University of Málaga). The project focuses on implementing a set of trajectory-based
 metaheuristics to optimize `multiple sequence alignment <https://en.wikipedia.org/wiki/Multiple_sequence_alignment>`_
 problems (MSA).

@@ -1,4 +1,4 @@
-package org.pabuma.ryuq.simulatedannealing;
+package org.pabuma.ryuq.localseach;
 
 import org.junit.jupiter.api.Test;
 import org.pabuma.ryuq.component.createinitialsolution.impl.DefaultSolutionCreation;
