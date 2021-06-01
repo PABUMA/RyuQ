@@ -9,8 +9,6 @@ import org.pabuma.ryuq.iteratedlocalsearch.IteratedLocalSearch;
 import org.pabuma.ryuq.msa.MSAProblem;
 import org.pabuma.ryuq.msa.MSASolution;
 import org.pabuma.ryuq.msa.mutation.RandomGapInsertion;
-import org.pabuma.ryuq.simulatedannealing.SimulatedAnnealing;
-import org.pabuma.ryuq.simulatedannealing.cooling.impl.Geometric;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.util.observer.impl.PrintObjectivesObserver;
 

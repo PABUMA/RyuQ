@@ -2,12 +2,9 @@ package org.pabuma.ryuq.iteratedlocalsearch;
 
 import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
-import org.pabuma.ryuq.localsearch.LocalSearch;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
-
-import java.util.ArrayList;
 
 public class IteratedLocalSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
 
