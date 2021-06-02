@@ -25,7 +25,7 @@ class TabuListTest<S extends Solution<?>>{
     @Test
     public void tabuListContains(){
         BinaryProblem problem = new OneMax(512);
-        TabuList tabuList = new TabuList();
+        TabuList tabuList = new TabuList(100);
         BinarySolution solution = problem.createSolution();
         BinarySolution solution1 = (BinarySolution) solution.copy();
         problem.evaluate(solution);
@@ -37,7 +37,7 @@ class TabuListTest<S extends Solution<?>>{
     @Test
     public void tabuListNotContains(){
         BinaryProblem problem = new OneMax(512);
-        TabuList tabuList = new TabuList();
+        TabuList tabuList = new TabuList(100);
         BinarySolution solution = problem.createSolution();
         BinarySolution solution1 = problem.createSolution();
         tabuList.addList(solution);
@@ -47,7 +47,7 @@ class TabuListTest<S extends Solution<?>>{
 
     @Test
     public void tabuListWithMSAProblem() throws IOException {
-        TabuList tabuList = new TabuList();
+        TabuList tabuList = new TabuList(100);
         SubstitutionMatrix substitutionMatrix = new GenericSubstitutionMatrix("resources/PAM250Matrix");
         MSAProblem problem = new MSAProblem("resources/BB11001.tfa_muscle",
                 List.of(new SumOfPairs(substitutionMatrix)));

@@ -25,14 +25,14 @@ public class TabuSearch<S extends Solution<?>> extends TrajectoryAlgorithm<S> {
                       TerminationCondition terminationCriterion) {
         super(problem, createInitialSolution, terminationCriterion) ;
         this.mutationOperator = mutation;
-        this.tabuList = new TabuList<>();
+        this.tabuList = new TabuList<>(100);
     }
 
     public TabuSearch(Problem<S> problem,
                       MutationOperator<S> mutation,
                       TerminationCondition terminationCriterion) {
         this(problem, mutation, null, terminationCriterion) ;
-        this.tabuList = new TabuList<>();
+        this.tabuList = new TabuList<>(100);
     }
 
     public S upgrade(S currentSolution) {

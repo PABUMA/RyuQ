@@ -2,14 +2,15 @@ package org.pabuma.ryuq.tabusearch;
 
 import org.uma.jmetal.solution.Solution;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TabuList <S extends Solution<?>> {
-    List<String> tabuList;
+    Queue tabuList;
+    int maxSize;
 
-    public TabuList(){
-        tabuList=new ArrayList<>();
+    public TabuList(int size){
+        tabuList=new LinkedList<String>();
+        maxSize = size;
     }
 
     public boolean inIn(Solution<?> solution){
@@ -24,10 +25,12 @@ public class TabuList <S extends Solution<?>> {
 
     public void addList(Solution<?> solution){
         String sequenceString = "" ;
+        if (tabuList.size() == maxSize) {
+            tabuList.poll();
+        }
         for (int i = 0 ; i < solution.variables().size(); i++) {
             sequenceString += solution.variables().get(i).toString() ;
         }
-
         tabuList.add(sequenceString);
     }
 }
