@@ -15,7 +15,7 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class VariableNeighbourhoodSearchTest {
+public class VariableNeighbourhoodIT {
   @Test
   public void vnsShouldSolveOneMaxProblem() {
     int bits = 1024;
