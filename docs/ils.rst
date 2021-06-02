@@ -2,7 +2,7 @@ Iterated Local Search (also known as ILS) applies local search to an initial sol
 
 On the one hand, its generality makes it a framework for other metaheuristics (such as VNS); on the other hand, other metaheuristics can be easily incorporated as subcomponents. ILS is a simple but powerful metaheuristic algorithm.
 
-.. image:: /figures/ils.png
+.. image:: figures/ils.png
 
 Pseudocode
 ----------
@@ -23,7 +23,7 @@ function IterateLocalSearch(GeneralInitialSolution):
 
 The key idea underlying iterated local search is to focus the search not on the full space of all candidate solutions but on the solutions that are returned by some underlying algorithm, typically a local search heuristic. We can say that Iterated Local Search is a non nature-inspired algorithm.
 
-.. image:: /figures/ils2.png
+.. image:: figures/ils2.png
 
 **Fuentes**: 
 `Metaheuristics in Combinatorial Optimization: Overview and Conceptual Comparison Christian Blum, Andrea Roli <https://informatica.cv.uma.es/mod/resource/view.php?id=389734>`_ 
