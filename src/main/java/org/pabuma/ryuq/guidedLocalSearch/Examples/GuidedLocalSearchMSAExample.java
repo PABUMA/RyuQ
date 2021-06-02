@@ -30,7 +30,7 @@ public class GuidedLocalSearchMSAExample {
                 problem,
                 mutation,
                 initialSolution,
-                new TerminationByEvaluations(100000),100000);
+                new TerminationByEvaluations(1000000),100000);
 
         PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
         glocalSearch.getObservable().register(objectivesObserver);
