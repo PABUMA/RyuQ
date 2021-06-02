@@ -29,7 +29,7 @@ public class TabuSearchMSAExample {
                 new DefaultSolutionCreation<>(problem),
                 new TerminationByEvaluations(1000000));
 
-        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(2000);
+        PrintObjectivesObserver objectivesObserver = new PrintObjectivesObserver(20000);
         tabusearch.getObservable().register(objectivesObserver);
 
         tabusearch.run();
