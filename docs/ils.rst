@@ -6,14 +6,16 @@ On the one hand, its generality makes it a framework for other metaheuristics (s
 
 Pseudocode
 ----------
-function IterateLocalSearch(GeneralInitialSolution):
-	s  = GeneralInitialSolution
-	s* = LocalSearch(s, maxIterations)
-	while(!terminationCondition):
-		s'  = Perturbation(s*, n)
-		s*' = LocalSearch(s', maxIterations)
-		s*  = AcceptanceCriterion(s*, s*')
-	end
+.. code-block:: python
+
+	function IterateLocalSearch(GeneralInitialSolution):
+		s  = GeneralInitialSolution
+		s* = LocalSearch(s, maxIterations)
+		while(!terminationCondition):
+			s'  = Perturbation(s*, n)
+			s*' = LocalSearch(s', maxIterations)
+			s*  = AcceptanceCriterion(s*, s*')
+		end
 
 (1) Execute local search (LS) from an initial state s until a local minimum s* is found.
 (2) Perturb s* and obtain s'.
