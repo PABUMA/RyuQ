@@ -1,7 +1,6 @@
 package org.pabuma.ryuq.variableneighbourhoodsearch;
 
 import org.pabuma.ryuq.TrajectoryAlgorithm;
-import org.pabuma.ryuq.component.createinitialsolution.CreateInitialSolution;
 import org.pabuma.ryuq.component.terminationcondition.TerminationCondition;
 import org.pabuma.ryuq.component.terminationcondition.impl.TerminationByEvaluations;
 import org.pabuma.ryuq.localsearch.LocalSearch;
