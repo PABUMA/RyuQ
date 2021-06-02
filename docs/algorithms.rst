@@ -34,6 +34,8 @@ N(s) are forbidden by the tabu list.
 Iterated Local Search
 ---------------------
 
+.. include:: ils.rst
+
 Variable Neighborhood Search
 ----------------------------
 
