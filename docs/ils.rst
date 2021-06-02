@@ -5,9 +5,7 @@ On the one hand, its generality makes it a framework for other metaheuristics (s
 .. image:: figures/ils.png
 
 Pseudocode
-^^^^^^^^^^
-
-.. code-block:: python
+----------
 function IterateLocalSearch(GeneralInitialSolution):
 	s  = GeneralInitialSolution
 	s* = LocalSearch(s, maxIterations)
