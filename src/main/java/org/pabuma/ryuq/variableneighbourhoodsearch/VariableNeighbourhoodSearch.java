@@ -71,12 +71,12 @@ public class VariableNeighbourhoodSearch<S extends Solution<?>> extends Trajecto
    * @param currentSolution: solution from which to generate the neighborhoods.
    * @return Array list containing ArrayLists with neighbourhood items.
    */
-  public ArrayList generateNeighbourhoods(S currentSolution) {
-    ArrayList<ArrayList<S>> neighbourhoods = new ArrayList<ArrayList<S>>();
+  public ArrayList<ArrayList<S>> generateNeighbourhoods(S currentSolution) {
+    ArrayList<ArrayList<S>> neighbourhoods = new ArrayList<>();
 
     // For each k-neighbourhood
     for (int k = 1; k <= this.k_max; k++) {
-      ArrayList<S> kNeighbourhood = new ArrayList<S>();
+      ArrayList<S> kNeighbourhood = new ArrayList<>();
       // For each item in k-neighbourhood
       for (int item = 0; item < this.itemsPerNeighbourhood; item++) {
         // Apply k mutations of distance 1 for each item
