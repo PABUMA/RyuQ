@@ -6,29 +6,29 @@ performing ten independent runs per algorithm by using as the target problem the
 previously aligned by using Clustal Omega (file `BB11001.tfa_clu`, located in the resources folder). To ensure that
 the comparison is fair, all the algorithms are configured to stop when 1 million of evaluation have been computed.
 
-+-----+------+------+------+------+
-| Run |  LS  |  SA  |  ILS |  GLS |
-+=====+======+======+======+======+
-|  1  |  31  |  34  |  32  |  37  |
-+-----+------+------+------+------+
-|  2  |  34  |  29  |  34  |  39  |
-+-----+------+------+------+------+
-|  3  |  27  |  27  |  29  |  34  |
-+-----+------+------+------+------+
-|  4  |  34  |  30  |  29  |  29  |
-+-----+------+------+------+------+
-|  5  |  45  |  31  |  42  |  31  |
-+-----+------+------+------+------+
-|  6  |  28  |  43  |  50  |  30  |
-+-----+------+------+------+------+
-|  7  |  26  |  25  |  31  |  33  |
-+-----+------+------+------+------+
-|  8  |  40  |  26  |  27  |  31  |
-+-----+------+------+------+------+
-|  9  |  34  |  27  |  45  |  30  |
-+-----+------+------+------+------+
-| 10  |  31  |  47  |  32  |  31  |
-+-----+------+------+------+------+
++-----+------+------+------+------+------+
+| Run |  LS  |  SA  |  ILS |  GLS |  TS  |
++=====+======+======+======+======+======+
+|  1  |  31  |  34  |  32  |  37  |  42  |
++-----+------+------+------+------+------+
+|  2  |  34  |  29  |  34  |  39  |  33  |
++-----+------+------+------+------+------+
+|  3  |  27  |  27  |  29  |  34  |  29  |
++-----+------+------+------+------+------+
+|  4  |  34  |  30  |  29  |  29  |  34  |
++-----+------+------+------+------+------+
+|  5  |  45  |  31  |  42  |  31  |  28  |
++-----+------+------+------+------+------+
+|  6  |  28  |  43  |  50  |  30  |  27  |
++-----+------+------+------+------+------+
+|  7  |  26  |  25  |  31  |  33  |  26  |
++-----+------+------+------+------+------+
+|  8  |  40  |  26  |  27  |  31  |  47  |
++-----+------+------+------+------+------+
+|  9  |  34  |  27  |  45  |  30  |  23  |
++-----+------+------+------+------+------+
+| 10  |  31  |  47  |  32  |  31  |  31  |
++-----+------+------+------+------+------+
 
 
 .. code-block:: python
@@ -40,8 +40,9 @@ the comparison is fair, all the algorithms are configured to stop when 1 million
     local_search_fitness = [31,34,27,34,45,28,26,40,34,31]
     simulated_annealing_fitness = [34,29,27,30,31,43,25,26,27,47]
     iterated_local_search_fitness = [32,34,29,29,42,50,31,27,35,32]
+    tabu_search = [42,33,29,34,28,27,26,47,23,31]
 
-    plt.boxplot([local_search_fitness, simulated_annealing_fitness, iterated_local_search_fitness], labels=["LS", "SA", "ILS"])
+    plt.boxplot([local_search_fitness, simulated_annealing_fitness, iterated_local_search_fitness, tabu_search], labels=["LS", "SA", "ILS", "TS"])
     plt.show()
 
     # https://www.statology.org/mann-whitney-u-test-python/
