@@ -50,4 +50,4 @@ the comparison is fair, all the algorithms are configured to stop when 1 million
     # https://www.statology.org/mann-whitney-u-test-python/
     print(stats.mannwhitneyu(local_search_fitness, simulated_annealing_fitness))
 
-.. image:: figures/boxplot3.png
+.. image:: figures/performance_boxplot.png
