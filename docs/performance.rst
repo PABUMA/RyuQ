@@ -2,9 +2,9 @@ Performance evaluation
 ======================
 
 To assess the performance of the implemented algorithms, we are going to conduct an experimentation process consisting in
-performing ten independent runs per algorithm by using as target problem the BB11001 instance which has been
+performing ten independent runs per algorithm by using as the target problem the BB11001 instance which has been
 previously aligned by using Clustal Omega (file `BB11001.tfa_clu`, located in the resources folder). To ensure that
-the comparison is fair, all the algorithms are configured to stop when  1 million of evaluation as been computed.
+the comparison is fair, all the algorithms are configured to stop when 1 million of evaluation have been computed.
 
 +-----+------+------+------+------+
 | Run |  LS  |  SA  |  ILS |  GLS |
@@ -39,8 +39,9 @@ the comparison is fair, all the algorithms are configured to stop when  1 millio
 
     local_search_fitness = [31,34,27,34,45,28,26,40,34,31]
     simulated_annealing_fitness = [34,29,27,30,31,43,25,26,27,47]
+    iterated_local_search_fitness = [32,34,29,29,42,50,31,27,35,32]
 
-    plt.boxplot([local_search_fitness, simulated_annealing_fitness], labels=["LS", "SA"])
+    plt.boxplot([local_search_fitness, simulated_annealing_fitness, iterated_local_search_fitness], labels=["LS", "SA", "ILS"])
     plt.show()
 
     # https://www.statology.org/mann-whitney-u-test-python/
