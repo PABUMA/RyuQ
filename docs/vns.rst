@@ -11,7 +11,7 @@ solution processes, as well as computer-assisted discovery of conjectures in gra
 	:align: center
 
 Pseudocode
-^^^^^^^^^^^
+^^^^^^^^^^
 
 .. code-block:: python
 
@@ -29,3 +29,31 @@ Pseudocode
 					k = k + 1
 
 .. image:: https://user-images.githubusercontent.com/43888615/118771038-536f6280-b882-11eb-9e91-e505f82be8db.png
+
+Constructor description
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+  public VariableNeighbourhoodSearch(
+      Problem<S> problem,
+      S initialSolution,
+      TerminationCondition terminationCondition,
+      MutationOperator<S> mo,
+      int k_max,
+      int itemsPerNeighbourhood,
+      int localSearchEvaluations) {
+    super(problem, initialSolution, terminationCondition);
+    this.k_max = k_max;
+    this.itemsPerNeighbourhood = itemsPerNeighbourhood;
+    this.localSearchEvaluations = localSearchEvaluations;
+    this.mo = mo;
+  }
+
+- ``Problem<S> problem``: object from Problem class that represent the issue to solve.
+- ``S initialSolution``: object from Solution class that represent the initial solution from which to start the search for the optimal solution.
+- ``TerminationCondition terminationCondition``: end of execution condition. It can be due to evaluations, execution time, etc...
+- ``MutationOperator<S> mo``: object from MutationOperartor class that performs mutation operations on solution objects in order to find better results.
+- ``int k_max``: the maximun number of k-neighborhoods to be explored.
+- ``int itemsPerNeighbourhood``: number of values that are generated for each k-neighborhood.
+- ``int localSearchEvaluations``: output parameter for localSearch based on number of evaluations.
