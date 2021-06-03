@@ -23,7 +23,7 @@ There are six types of Trajectory-based Metaheuristics methods:
 (3) ILS: Iterated Local Search
 (4) TS: Tabu Search
 (5) SA: Simulated Annealing
-(7) GLS: Guided Local Search
+(6) GLS: Guided Local Search
 
 **Sources**:
 `Metaheuristic optimization, Xin-She Yang <http://www.scholarpedia.org/article/Metaheuristic_Optimization>`_
