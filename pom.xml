@@ -29,6 +29,7 @@
 
     </repositories>
 
+<<<<<<< HEAD
 <dependencies>
     <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -57,6 +58,36 @@
         <version>5.4.0</version>
     </dependency>
 </dependencies>
+=======
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ajnebro</groupId>
+            <artifactId>jMSA</artifactId>
+            <version>2eaa69c0ce470c98421789805987114b6260d3c2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uma.jmetal</groupId>
+            <artifactId>jmetal-core</artifactId>
+            <version>5.11-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.uma.jmetal</groupId>
+            <artifactId>jmetal-problem</artifactId>
+            <version>5.11-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.biojava</groupId>
+            <artifactId>biojava-core</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+    </dependencies>
+>>>>>>> main
 
     <build>
         <plugins>
